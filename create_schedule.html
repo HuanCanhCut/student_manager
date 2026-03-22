@@ -1,0 +1,839 @@
+<!doctype html>
+
+<html class="light" lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Tạo lịch học mới - Midnight Academy</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-background": "#0f172a",
+              "secondary-fixed-dim": "#e2e8f0",
+              "secondary-fixed": "#f1f5f9",
+              "tertiary-container": "#ffedd5",
+              "on-primary-fixed": "#1e3a8a",
+              "primary-fixed-dim": "#bfdbfe",
+              "primary-fixed": "#dbeafe",
+              tertiary: "#ea580c",
+              "surface-container-lowest": "#ffffff",
+              "surface-container": "#f1f5f9",
+              "surface-variant": "#f1f5f9",
+              error: "#ef4444",
+              "surface-tint": "#137fec",
+              "surface-container-highest": "#cbd5e1",
+              "on-surface-variant": "#475569",
+              "on-secondary": "#ffffff",
+              secondary: "#475569",
+              "inverse-primary": "#93c5fd",
+              "error-container": "#fee2e2",
+              "on-error-container": "#991b1b",
+              "surface-container-high": "#e2e8f0",
+              "surface-bright": "#ffffff",
+              "on-secondary-container": "#334155",
+              "surface-dim": "#f6f7f8",
+              surface: "#ffffff",
+              "on-primary": "#ffffff",
+              "on-secondary-fixed": "#0f172a",
+              "outline-variant": "#cbd5e1",
+              background: "#f6f7f8",
+              "primary-container": "#dbeafe",
+              "on-surface": "#0f172a",
+              "on-secondary-fixed-variant": "#334155",
+              primary: "#137fec",
+              outline: "#e2e8f0",
+              "on-primary-fixed-variant": "#1d4ed8",
+              "on-error": "#ffffff",
+              "surface-container-low": "#f8fafc",
+              "on-tertiary": "#ffffff",
+              "tertiary-fixed-dim": "#fed7aa",
+              "inverse-surface": "#1e293b",
+              "inverse-on-surface": "#f1f5f9",
+              "on-primary-container": "#1e40af",
+              "on-tertiary-container": "#9a3412",
+              "tertiary-fixed": "#ffedd5",
+              "on-tertiary-fixed-variant": "#c2410c",
+              "on-tertiary-fixed": "#431407",
+            },
+            fontFamily: {
+              headline: ["Lexend"],
+              body: ["Lexend"],
+              label: ["Lexend"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      body {
+        font-family: "Lexend", sans-serif;
+      }
+      /* Custom selection class for week buttons */
+      .week-btn.selected {
+        background-color: #137fec;
+        color: white;
+        border-color: #137fec;
+        box-shadow:
+          0 4px 6px -1px rgb(19 127 236 / 0.1),
+          0 2px 4px -2px rgb(19 127 236 / 0.1);
+      }
+      /* Custom selection class for day chips */
+      .day-chip.selected {
+        background-color: #137fec;
+        color: white;
+        border-color: #137fec;
+        box-shadow:
+          0 4px 6px -1px rgb(19 127 236 / 0.1),
+          0 2px 4px -2px rgb(19 127 236 / 0.1);
+      }
+    </style>
+  </head>
+  <body class="bg-background text-on-background min-h-screen">
+    <!-- SideNavBar -->
+    <aside
+      class="bg-slate-900 dark:bg-slate-950 h-screen w-64 fixed left-0 top-0 z-40 shadow-xl flex flex-col h-full py-6"
+    >
+      <div class="px-6 mb-8">
+        <h1 class="text-xl font-extrabold tracking-tight text-white">
+          Midnight Academy
+        </h1>
+        <p
+          class="font-lexend text-[10px] font-bold tracking-widest uppercase text-slate-400"
+        >
+          Faculty Portal
+        </p>
+      </div>
+      <nav class="flex-1 space-y-1">
+        <a
+          class="text-slate-400 hover:text-white hover:bg-slate-800 rounded-xl mx-2 px-4 py-3 mb-1 transition-all flex items-center gap-3 font-lexend text-sm font-medium tracking-wide uppercase"
+          href="#"
+        >
+          <span class="material-symbols-outlined">dashboard</span>
+          Tổng quan
+        </a>
+        <a
+          class="bg-blue-600 text-white rounded-xl shadow-md mx-2 px-4 py-3 mb-1 flex items-center gap-3 font-lexend text-sm font-medium tracking-wide uppercase"
+          href="schedule.html"
+        >
+          <span class="material-symbols-outlined">calendar_month</span>
+          Lịch dạy của tôi
+        </a>
+        <a
+          class="text-slate-400 hover:text-white hover:bg-slate-800 rounded-xl mx-2 px-4 py-3 mb-1 transition-all flex items-center gap-3 font-lexend text-sm font-medium tracking-wide uppercase"
+          href="#"
+        >
+          <span class="material-symbols-outlined">school</span>
+          Quản lý lớp học
+        </a>
+      </nav>
+      <div class="pt-6 mt-6 border-t border-slate-800 space-y-1">
+        <a
+          class="text-slate-400 hover:text-white hover:bg-slate-800 rounded-xl mx-2 px-4 py-3 mb-1 transition-all flex items-center gap-3 font-lexend text-sm font-medium tracking-wide uppercase"
+          href="#"
+        >
+          <span class="material-symbols-outlined">settings</span>
+          Cài đặt
+        </a>
+        <a
+          class="text-slate-400 hover:text-white hover:bg-slate-800 rounded-xl mx-2 px-4 py-3 mb-1 transition-all flex items-center gap-3 font-lexend text-sm font-medium tracking-wide uppercase"
+          href="#"
+          onclick="
+            localStorage.removeItem('access_token');
+            window.location.href = 'auth.html';
+          "
+        >
+          <span class="material-symbols-outlined">logout</span>
+          Đăng xuất
+        </a>
+      </div>
+    </aside>
+
+    <!-- TopNavBar -->
+    <header
+      class="fixed top-0 right-0 w-full z-30 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm border-b border-slate-100 dark:border-slate-800 flex justify-between items-center px-8 h-16"
+    >
+      <div class="flex items-center gap-4 flex-1">
+        <div class="relative w-full max-w-md">
+          <span
+            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            >search</span
+          >
+          <input
+            class="w-full bg-slate-50 border-none rounded-xl py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 transition-all"
+            placeholder="Tìm kiếm tài liệu, lớp học..."
+            type="text"
+          />
+        </div>
+      </div>
+      <div class="flex items-center gap-4 pl-64">
+        <div class="text-right">
+          <p
+            id="user-name"
+            class="text-sm font-bold text-on-background leading-tight"
+          >
+            —
+          </p>
+          <p id="user-title" class="text-[11px] text-slate-400 leading-tight">
+            —
+          </p>
+        </div>
+        <div
+          id="user-avatar"
+          class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-white font-extrabold text-sm select-none"
+        >
+          ?
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Canvas -->
+    <main class="ml-64 pt-24 px-8 pb-12">
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-2 mb-6">
+        <a
+          class="text-slate-400 text-sm hover:text-primary transition-colors"
+          href="schedule.html"
+          >Lịch dạy của tôi</a
+        >
+        <span class="material-symbols-outlined text-slate-300 text-sm"
+          >chevron_right</span
+        >
+        <span class="text-primary text-sm font-semibold">Tạo lịch học mới</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div class="mb-10">
+        <h2
+          class="text-3xl font-extrabold tracking-tight text-on-background mb-2"
+        >
+          Thiết lập lịch học
+        </h2>
+        <p class="text-slate-500 max-w-2xl">
+          Chọn lớp học, các tuần và thứ trong tuần để tự động tạo lịch giảng
+          dạy.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-12 gap-8 items-start">
+        <!-- Form Container -->
+        <div class="col-span-12 lg:col-span-8">
+          <form
+            id="create-schedule-form"
+            class="bg-surface rounded-2xl shadow-sm border border-slate-100 p-8"
+          >
+            <div class="grid grid-cols-2 gap-6 mb-8">
+              <!-- Học kỳ -->
+              <div class="space-y-2">
+                <label
+                  class="text-[11px] font-bold uppercase tracking-widest text-slate-500 px-1"
+                  >Chọn Học kỳ</label
+                >
+                <select
+                  id="semester-select"
+                  class="w-full bg-slate-50 border-outline rounded-xl py-3 px-4 text-sm focus:ring-primary/20 focus:border-primary transition-all"
+                >
+                  <option value="">Đang tải...</option>
+                </select>
+              </div>
+
+              <!-- Môn học - Lớp -->
+              <div class="space-y-2">
+                <label
+                  class="text-[11px] font-bold uppercase tracking-widest text-slate-500 px-1"
+                  >Chọn lớp đang dạy</label
+                >
+                <select
+                  id="class-subject-select"
+                  class="w-full bg-slate-50 border-outline rounded-xl py-3 px-4 text-sm focus:ring-primary/20 focus:border-primary transition-all"
+                >
+                  <option value="">Chọn học kỳ trước...</option>
+                </select>
+              </div>
+
+              <!-- Phòng học -->
+              <div class="col-span-2 space-y-2">
+                <label
+                  class="text-[11px] font-bold uppercase tracking-widest text-slate-500 px-1"
+                  >Phòng học</label
+                >
+                <input
+                  id="room-input"
+                  type="text"
+                  placeholder="Ví dụ: Lab 402"
+                  class="w-full bg-slate-50 border-outline rounded-xl py-3 px-4 text-sm focus:ring-primary/20 focus:border-primary transition-all"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- Chọn tuần học -->
+            <div class="space-y-3 mb-8">
+              <div class="flex items-center justify-between px-1">
+                <label
+                  class="text-[11px] font-bold uppercase tracking-widest text-slate-500"
+                  >Chọn tuần học</label
+                >
+                <button
+                  type="button"
+                  id="select-all-weeks"
+                  class="text-[10px] font-bold text-primary hover:underline"
+                >
+                  Chọn tất cả
+                </button>
+              </div>
+              <div
+                id="weeks-grid"
+                class="grid grid-cols-5 sm:grid-cols-10 gap-2"
+              >
+                <!-- Weeks will be loaded here -->
+              </div>
+            </div>
+
+            <!-- Chọn thứ trong tuần -->
+            <div class="space-y-3 mb-8">
+              <label
+                class="text-[11px] font-bold uppercase tracking-widest text-slate-500 px-1"
+                >Chọn thứ trong tuần</label
+              >
+              <div id="days-chips" class="flex flex-wrap gap-3">
+                <button
+                  type="button"
+                  data-day="0"
+                  class="day-chip px-6 py-2 rounded-full border border-slate-200 text-sm font-medium transition-all hover:bg-slate-50"
+                >
+                  Thứ 2
+                </button>
+                <button
+                  type="button"
+                  data-day="1"
+                  class="day-chip px-6 py-2 rounded-full border border-slate-200 text-sm font-medium transition-all hover:bg-slate-50"
+                >
+                  Thứ 3
+                </button>
+                <button
+                  type="button"
+                  data-day="2"
+                  class="day-chip px-6 py-2 rounded-full border border-slate-200 text-sm font-medium transition-all hover:bg-slate-50"
+                >
+                  Thứ 4
+                </button>
+                <button
+                  type="button"
+                  data-day="3"
+                  class="day-chip px-6 py-2 rounded-full border border-slate-200 text-sm font-medium transition-all hover:bg-slate-50"
+                >
+                  Thứ 5
+                </button>
+                <button
+                  type="button"
+                  data-day="4"
+                  class="day-chip px-6 py-2 rounded-full border border-slate-200 text-sm font-medium transition-all hover:bg-slate-50"
+                >
+                  Thứ 6
+                </button>
+                <button
+                  type="button"
+                  data-day="5"
+                  class="day-chip px-6 py-2 rounded-full border border-slate-200 text-sm font-medium transition-all hover:bg-slate-50"
+                >
+                  Thứ 7
+                </button>
+                <button
+                  type="button"
+                  data-day="6"
+                  class="day-chip px-6 py-2 rounded-full border border-slate-200 text-sm font-medium transition-all hover:bg-slate-50 text-error border-error/20 hover:bg-error/5"
+                >
+                  CN
+                </button>
+              </div>
+            </div>
+
+            <!-- Tiết học -->
+            <div class="space-y-3 mb-8">
+              <label
+                class="text-[11px] font-bold uppercase tracking-widest text-slate-500 px-1"
+                >Chọn Tiết học</label
+              >
+              <div id="time-slots" class="grid grid-cols-5 gap-3">
+                <!-- Generated by JS -->
+              </div>
+            </div>
+
+            <!-- Error/Conflict Alert -->
+            <div id="form-alert" class="hidden mb-10"></div>
+
+            <!-- Actions -->
+            <div
+              class="flex items-center justify-end gap-4 border-t border-slate-100 pt-8"
+            >
+              <a
+                href="schedule.html"
+                class="px-8 py-3 rounded-xl text-sm font-bold text-slate-600 hover:bg-slate-50 transition-colors"
+              >
+                Hủy
+              </a>
+              <button
+                id="submit-btn"
+                type="submit"
+                class="px-8 py-3 rounded-xl bg-primary text-white text-sm font-bold shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all flex items-center gap-2"
+              >
+                <span class="material-symbols-outlined text-lg"
+                  >add_circle</span
+                >
+                Xác nhận tạo lịch
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Preview Widget -->
+        <div class="col-span-12 lg:col-span-4">
+          <div
+            class="bg-surface rounded-2xl shadow-sm border border-slate-100 p-6 sticky top-24"
+          >
+            <h3
+              class="text-sm font-extrabold uppercase tracking-widest text-slate-400 mb-4"
+            >
+              Xem trước
+            </h3>
+            <div
+              id="preview-card"
+              class="bg-slate-50 rounded-xl p-5 border border-dashed border-slate-200 text-center text-slate-400 text-sm"
+            >
+              Chọn các thông tin bên trái để xem trước lịch học
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="api.js"></script>
+    <script>
+      const TIME_SLOTS = [
+        { label: "Tiết 1", start: "07:15", end: "08:05" },
+        { label: "Tiết 2", start: "08:10", end: "09:00" },
+        { label: "Tiết 3", start: "09:05", end: "09:55" },
+        { label: "Tiết 4", start: "10:05", end: "10:55" },
+        { label: "Tiết 5", start: "11:00", end: "11:50" },
+        { label: "Tiết 6", start: "11:55", end: "12:45" },
+        { label: "Tiết 7", start: "12:50", end: "13:40" },
+        { label: "Tiết 8", start: "13:45", end: "14:35" },
+        { label: "Tiết 9", start: "14:40", end: "15:30" },
+        { label: "Tiết 10", start: "15:40", end: "16:30" },
+        { label: "Tiết 11", start: "16:35", end: "17:25" },
+      ];
+
+      const DAY_LABELS = [
+        "Thứ 2",
+        "Thứ 3",
+        "Thứ 4",
+        "Thứ 5",
+        "Thứ 6",
+        "Thứ 7",
+        "CN",
+      ];
+
+      let selectedTimeSlots = new Set(); // indices into TIME_SLOTS
+      let selectedWeeks = new Set();
+      let selectedDays = new Set();
+      let weeksData = [];
+
+      // ------- Init -------
+      async function init() {
+        if (!localStorage.getItem("access_token")) {
+          window.location.href = "auth.html";
+          return;
+        }
+
+        await Promise.all([loadSemesters(), loadWeeks(), loadCurrentUser()]);
+
+        setupTimeSlots();
+        setupDayChips();
+        setupFormSubmit();
+        setupPreview();
+
+        document
+          .getElementById("select-all-weeks")
+          .addEventListener("click", (e) => {
+            const btn = e.target;
+            if (selectedWeeks.size === weeksData.length) {
+              selectedWeeks.clear();
+              btn.textContent = "Chọn tất cả";
+            } else {
+              weeksData.forEach((w) => selectedWeeks.add(w.week_number));
+              btn.textContent = "Bỏ chọn tất cả";
+            }
+            renderWeeks();
+            updatePreview();
+          });
+      }
+
+      // ------- Load Current User -------
+      async function loadCurrentUser() {
+        try {
+          const res = await apiFetch("/auth/me");
+          const user = res.data || res;
+          const name =
+            user.full_name || user.name || user.username || "Người dùng";
+          const title = user.role_label || user.role || user.title || "";
+          document.getElementById("user-name").textContent = name;
+          document.getElementById("user-title").textContent = title;
+          // Avatar: first letter of name
+          document.getElementById("user-avatar").textContent = name
+            .trim()
+            .slice(-1)
+            .toUpperCase();
+        } catch (err) {
+          // silently fail — auth redirect handles token issues
+        }
+      }
+
+      // ------- Load Semesters -------
+      async function loadSemesters() {
+        const select = document.getElementById("semester-select");
+        try {
+          const res = await apiFetch("/semesters");
+          const semesters = res.data;
+          select.innerHTML =
+            '<option value="">-- Chọn học kỳ --</option>' +
+            semesters
+              .map((s) => `<option value="${s.id}">${s.name}</option>`)
+              .join("");
+
+          select.addEventListener("change", () => {
+            loadClassSubjects(select.value);
+            updatePreview();
+          });
+
+          if (semesters.length > 0) {
+            select.value = semesters[0].id;
+            await loadClassSubjects(semesters[0].id);
+          }
+        } catch (err) {
+          select.innerHTML = '<option value="">Lỗi tải dữ liệu</option>';
+        }
+      }
+
+      // ------- Load Weeks -------
+      async function loadWeeks() {
+        const grid = document.getElementById("weeks-grid");
+        try {
+          const res = await apiFetch("/semesters/weeks");
+          weeksData = res.data;
+          renderWeeks();
+        } catch (err) {
+          grid.innerHTML =
+            '<div class="col-span-full py-4 text-center text-error italic">Lỗi khi tải tuần học</div>';
+        }
+      }
+
+      function renderWeeks() {
+        const grid = document.getElementById("weeks-grid");
+        grid.innerHTML = "";
+
+        weeksData.forEach((w) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = `week-btn h-10 rounded-lg font-bold text-xs transition-all flex items-center justify-center border ${
+            selectedWeeks.has(w.week_number)
+              ? "selected"
+              : "bg-slate-50 text-slate-400 border-slate-100"
+          }`;
+          btn.textContent = `T${w.week_number}`;
+          btn.addEventListener("click", () => {
+            if (selectedWeeks.has(w.week_number)) {
+              selectedWeeks.delete(w.week_number);
+            } else {
+              selectedWeeks.add(w.week_number);
+            }
+            renderWeeks();
+            updatePreview();
+          });
+          grid.appendChild(btn);
+        });
+      }
+
+      // ------- Day Chips -------
+      function setupDayChips() {
+        const chips = document.querySelectorAll(".day-chip");
+        chips.forEach((chip) => {
+          chip.addEventListener("click", () => {
+            const day = parseInt(chip.dataset.day);
+            if (selectedDays.has(day)) {
+              selectedDays.delete(day);
+              chip.classList.remove("selected");
+            } else {
+              selectedDays.add(day);
+              chip.classList.add("selected");
+            }
+            updatePreview();
+          });
+        });
+      }
+
+      // ------- Load Class Subjects -------
+      async function loadClassSubjects(semesterId) {
+        const select = document.getElementById("class-subject-select");
+        if (!semesterId) {
+          select.innerHTML = '<option value="">Chọn học kỳ trước...</option>';
+          return;
+        }
+
+        select.innerHTML = '<option value="">Đang tải...</option>';
+        try {
+          const res = await apiFetch(
+            `/schedules/my-subjects?semester_id=${semesterId}`,
+          );
+          const subjects = res.data;
+
+          if (subjects.length === 0) {
+            select.innerHTML = '<option value="">Không có lớp nào</option>';
+            return;
+          }
+
+          select.innerHTML =
+            '<option value="">-- Chọn lớp --</option>' +
+            subjects
+              .map((cs) => {
+                const subjectName = cs.subject?.name || "N/A";
+                const className = cs.class?.name || "N/A";
+                return `<option value="${cs.id}">${subjectName} (Lớp ${className})</option>`;
+              })
+              .join("");
+        } catch (err) {
+          select.innerHTML = '<option value="">Lỗi tải dữ liệu</option>';
+        }
+      }
+
+      // ------- Time Slots -------
+      function setupTimeSlots() {
+        const container = document.getElementById("time-slots");
+        container.innerHTML = "";
+        TIME_SLOTS.forEach((slot, idx) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className =
+            "time-slot-btn flex flex-col items-center p-3 rounded-xl border border-slate-100 bg-slate-50 text-slate-600 hover:border-primary transition-all group";
+          btn.dataset.idx = idx;
+          btn.innerHTML = `
+            <span class="text-[10px] font-bold uppercase mb-0.5 text-slate-400 group-hover:text-primary">${slot.label}</span>
+            <span class="text-[11px] font-extrabold leading-none">${slot.start} - ${slot.end}</span>
+          `;
+          btn.addEventListener("click", () => {
+            if (selectedTimeSlots.has(idx)) {
+              selectedTimeSlots.delete(idx);
+              btn.classList.remove(
+                "selected",
+                "bg-primary",
+                "text-white",
+                "border-primary",
+              );
+              btn.classList.add("bg-slate-50", "text-slate-600");
+            } else {
+              selectedTimeSlots.add(idx);
+              btn.classList.add(
+                "selected",
+                "bg-primary",
+                "text-white",
+                "border-primary",
+              );
+              btn.classList.remove("bg-slate-50", "text-slate-600");
+            }
+            updatePreview();
+          });
+          container.appendChild(btn);
+        });
+      }
+
+      // ------- Preview -------
+      function setupPreview() {
+        ["class-subject-select", "room-input"].forEach((id) => {
+          document.getElementById(id).addEventListener("input", updatePreview);
+        });
+      }
+
+      function updatePreview() {
+        const card = document.getElementById("preview-card");
+        const csSelect = document.getElementById("class-subject-select");
+        const room = document.getElementById("room-input").value;
+        const csText = csSelect.options[csSelect.selectedIndex]?.text || "—";
+
+        if (
+          selectedWeeks.size === 0 &&
+          selectedDays.size === 0 &&
+          !selectedTimeSlot &&
+          !room
+        ) {
+          card.innerHTML = "Chọn các thông tin bên trái để xem trước lịch học";
+          return;
+        }
+
+        const sortedWeeks = Array.from(selectedWeeks).sort((a, b) => a - b);
+        const sortedDays = Array.from(selectedDays).sort((a, b) => a - b);
+        const weeksStr =
+          sortedWeeks.length > 0
+            ? sortedWeeks.map((w) => `T${w}`).join(", ")
+            : "—";
+        const daysStr =
+          sortedDays.length > 0
+            ? sortedDays.map((d) => DAY_LABELS[d]).join(", ")
+            : "—";
+        const sortedSlotIndices = Array.from(selectedTimeSlots).sort(
+          (a, b) => a - b,
+        );
+        const timeStr =
+          sortedSlotIndices.length > 0
+            ? sortedSlotIndices
+                .map((i) => `${TIME_SLOTS[i].label} (${TIME_SLOTS[i].start})`)
+                .join(", ")
+            : "—";
+        const total =
+          selectedWeeks.size * selectedDays.size * selectedTimeSlots.size;
+
+        card.innerHTML = `
+          <div class="text-left space-y-3">
+            <div class="bg-white p-4 rounded-xl border-l-4 border-primary">
+              <h4 class="text-sm font-extrabold text-on-surface mb-2">${csText}</h4>
+              <div class="space-y-1">
+                <p class="text-[11px] text-slate-500 font-medium"><b>Tuần:</b> ${weeksStr}</p>
+                <p class="text-[11px] text-slate-500 font-medium"><b>Thứ:</b> ${daysStr}</p>
+                <p class="text-[11px] text-slate-500 font-medium"><b>Tiết:</b> ${timeStr}</p>
+                <p class="text-[11px] text-slate-500 font-medium"><b>Phòng:</b> ${room || "—"}</p>
+              </div>
+            </div>
+            ${total > 0 ? `<div class="bg-primary/10 p-2 rounded text-center text-[10px] font-bold text-primary uppercase">Tổng cộng: ${total} buổi học</div>` : ""}
+          </div>
+        `;
+      }
+
+      // ------- Form Submit -------
+      function setupFormSubmit() {
+        document
+          .getElementById("create-schedule-form")
+          .addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById("submit-btn");
+            const class_subject_id = document.getElementById(
+              "class-subject-select",
+            ).value;
+            const room = document.getElementById("room-input").value;
+
+            if (
+              !class_subject_id ||
+              selectedWeeks.size === 0 ||
+              selectedDays.size === 0 ||
+              selectedTimeSlots.size === 0 ||
+              !room
+            ) {
+              showAlert("error", "Vui lòng chọn đầy đủ thông tin.");
+              return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML =
+              '<span class="material-symbols-outlined text-lg animate-spin">progress_activity</span> Đang xử lý...';
+
+            try {
+              const sessions = [];
+              const sortedSlots = Array.from(selectedTimeSlots).sort(
+                (a, b) => a - b,
+              );
+              selectedWeeks.forEach((wn) => {
+                const week = weeksData.find((w) => w.week_number === wn);
+                if (week) {
+                  selectedDays.forEach((dayIdx) => {
+                    const date = new Date(week.week_start);
+                    date.setDate(date.getDate() + dayIdx);
+                    const yyyy = date.getFullYear();
+                    const mm = String(date.getMonth() + 1).padStart(2, "0");
+                    const dd = String(date.getDate()).padStart(2, "0");
+                    const dateStr = `${yyyy}-${mm}-${dd}`;
+                    sortedSlots.forEach((slotIdx) => {
+                      sessions.push({
+                        date: dateStr,
+                        slot: TIME_SLOTS[slotIdx],
+                      });
+                    });
+                  });
+                }
+              });
+
+              let success = 0;
+              let fail = 0;
+
+              // Sequential creation to avoid race conditions or limits
+              for (const { date, slot } of sessions) {
+                try {
+                  await apiFetch("/schedules", {
+                    method: "POST",
+                    body: JSON.stringify({
+                      class_subject_id: Number(class_subject_id),
+                      date,
+                      start_time: slot.start,
+                      end_time: slot.end,
+                      room: room.trim(),
+                    }),
+                  });
+                  success++;
+                } catch (err) {
+                  fail++;
+                }
+              }
+
+              if (fail === 0) {
+                showAlert("success", `Tạo thành công ${success} buổi học!`);
+                setTimeout(() => {
+                  window.location.href = "schedule.html";
+                }, 1500);
+              } else {
+                showAlert(
+                  "error",
+                  `Tạo thành công ${success} và thất bại ${fail}. Vui lòng kiểm tra lại.`,
+                );
+                btn.disabled = false;
+                btn.innerHTML =
+                  '<span class="material-symbols-outlined text-lg">add_circle</span> Xác nhận tạo lịch';
+              }
+            } catch (err) {
+              showAlert("error", "Đã có lỗi hệ thống xảy ra.");
+              btn.disabled = false;
+            }
+          });
+      }
+
+      function showAlert(type, message) {
+        const el = document.getElementById("form-alert");
+        el.classList.remove("hidden");
+        el.className = `mb-10 p-4 rounded-xl text-xs font-bold ${type === "error" ? "bg-error/10 text-error" : "bg-emerald-50 text-emerald-600"}`;
+        el.textContent = message;
+      }
+
+      init();
+    </script>
+  </body>
+</html>
