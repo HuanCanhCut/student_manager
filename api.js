@@ -1,11 +1,5 @@
 const API_BASE = "http://localhost:8000/api";
 
-/**
- * Helper fetch tự động đính kèm Bearer token vào mọi request.
- * @param {string} endpoint - Đường dẫn API, vd: '/auth/login'
- * @param {RequestInit} options - Tùy chọn fetch (method, body, headers, ...)
- * @returns {Promise<any>} Response data (parsed JSON) hoặc null nếu 204
- */
 async function apiFetch(endpoint, options = {}) {
   const token = localStorage.getItem("access_token");
 
