@@ -109,7 +109,7 @@
   <body class="bg-background text-on-background min-h-screen">
     <!-- SideNavBar -->
     <aside
-      class="bg-slate-900 h-screen w-64 fixed left-0 top-0 overflow-y-auto shadow-xl flex flex-col py-6 z-50"
+      class="bg-slate-900 dark:bg-slate-950 h-screen w-64 fixed left-0 top-0 overflow-y-auto shadow-xl flex flex-col py-6 z-50"
     >
       <div class="px-6 mb-10">
         <h1 class="text-xl font-extrabold text-white tracking-tighter">
@@ -118,7 +118,7 @@
         <p
           class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mt-1"
         >
-          Hệ thống Giáo vụ
+          Hệ thống quản lý giáo viên
         </p>
       </div>
       <nav class="flex-1 space-y-1 px-3">
@@ -131,9 +131,21 @@
           >
           Tổng quan
         </a>
-        <!-- Active State: Quản lý sinh viên -->
+       
         <a
-          class="flex items-center px-4 py-3 rounded-xl transition-colors duration-200 bg-blue-600/10 text-blue-400 border-l-4 border-blue-500 font-bold font-lexend tracking-tight text-sm"
+          class="flex items-center px-4 py-3 rounded-xl transition-colors duration-200 text-slate-400 hover:text-slate-100 hover:bg-slate-800 group font-lexend tracking-tight text-sm font-medium"
+          href="schedule.html"
+        >
+          <span
+            class="material-symbols-outlined mr-3"
+            data-icon="calendar_month"
+            >calendar_month</span
+          >
+          Lịch dạy của tôi
+        </a>
+         <!-- Active State: Quản lý sinh viên -->
+        <a
+          class="flex items-center px-4 py-3 rounded-xl transition-colors duration-200 bg-blue-600/10 text-blue-400 border-l-4 border-blue-500 font-bold font-lexend tracking-tight text-sm scale-95 active:scale-100 transition-transform"
           href="#"
         >
           <span
@@ -146,23 +158,21 @@
         </a>
         <a
           class="flex items-center px-4 py-3 rounded-xl transition-colors duration-200 text-slate-400 hover:text-slate-100 hover:bg-slate-800 group font-lexend tracking-tight text-sm font-medium"
-          href="schedule.html"
+          href="#"
         >
-          <span
-            class="material-symbols-outlined mr-3"
-            data-icon="calendar_month"
-            >calendar_month</span
+          <span class="material-symbols-outlined mr-3" data-icon="groups"
+            >groups</span
           >
-          Lịch dạy của tôi
+          Quản lý lớp học
         </a>
         <a
           class="flex items-center px-4 py-3 rounded-xl transition-colors duration-200 text-slate-400 hover:text-slate-100 hover:bg-slate-800 group font-lexend tracking-tight text-sm font-medium"
           href="#"
         >
-          <span class="material-symbols-outlined mr-3" data-icon="grade"
-            >grade</span
+          <span class="material-symbols-outlined mr-3" data-icon="edit_square"
+            >edit_square</span
           >
-          Quản lý điểm
+          Nhập điểm
         </a>
         <a
           class="flex items-center px-4 py-3 rounded-xl transition-colors duration-200 text-slate-400 hover:text-slate-100 hover:bg-slate-800 group font-lexend tracking-tight text-sm font-medium"
@@ -171,7 +181,7 @@
           <span class="material-symbols-outlined mr-3" data-icon="payments"
             >payments</span
           >
-          Quản lý học phí
+          Học phí lớp chủ nhiệm
         </a>
       </nav>
       <div class="px-3 pt-6 mt-6 border-t border-slate-800/50">
