@@ -398,19 +398,29 @@
 
       // ==================== INITIALIZATION ====================
       document.addEventListener("DOMContentLoaded", () => {
-        const user = JSON.parse(localStorage.getItem("user") || "{}");
-        if (!user.first_name) {
+        if (!localStorage.getItem("access_token")) {
           window.location.href = "auth.html";
           return;
         }
 
-        // Update User Profile
-        document.getElementById("user-name").textContent = `${user.last_name} ${user.first_name}`;
-        document.getElementById("user-avatar").textContent = (user.first_name[0] || "?").toUpperCase();
-
+        loadCurrentUser();
         loadSemesters();
         setupEventListeners();
       });
+
+      async function loadCurrentUser() {
+        try {
+          const res = await apiFetch("/auth/me");
+          const user = res.data || res;
+          const name = user.full_name || user.name || user.username || "Người dùng";
+          const title = user.role_label || user.role || user.title || "Admin";
+          document.getElementById("user-name").textContent = name;
+          document.getElementById("user-title").textContent = title;
+          document.getElementById("user-avatar").textContent = name.trim().slice(-1).toUpperCase();
+        } catch (err) {
+          // silently fail
+        }
+      }
 
       async function loadSemesters() {
         try {
@@ -568,7 +578,7 @@
         modifiedMarks.add(studentId);
         
         const row = students.find(s => s.id === studentId);
-        if (!row.grades) row.grades = [{}];
+        if (!row.grades || row.grades.length === 0) row.grades = [{}];
         
         if (type === 'process') row.grades[0].first_component_grade = value === "" ? null : parseFloat(value);
         else row.grades[0].grade = value === "" ? null : parseFloat(value);
@@ -625,10 +635,11 @@
         try {
           const marksPayload = Array.from(modifiedMarks).map(id => {
             const s = students.find(st => st.id === id);
+            const gradeData = (s.grades && s.grades[0]) || {};
             return {
               student_id: id,
-              first_component_grade: s.grades[0].first_component_grade ?? 0,
-              grade: s.grades[0].grade ?? 0
+              first_component_grade: gradeData.first_component_grade ?? 0,
+              grade: gradeData.grade ?? 0
             };
           });
 
