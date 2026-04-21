@@ -1,927 +1,797 @@
 <!doctype html>
 
 <html class="light" lang="vi">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Quản lý sinh viên - Midnight Academy</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-      rel="stylesheet"
-    />
-    <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "inverse-surface": "#1e293b",
-              "surface-container-low": "#f8fafc",
-              "surface-bright": "#ffffff",
-              "surface-tint": "#137fec",
-              "surface-dim": "#f6f7f8",
-              secondary: "#475569",
-              "tertiary-fixed": "#ffedd5",
-              outline: "#e2e8f0",
-              "on-background": "#0f172a",
-              tertiary: "#ea580c",
-              background: "#f6f7f8",
-              "on-error": "#ffffff",
-              "outline-variant": "#cbd5e1",
-              "surface-container-highest": "#cbd5e1",
-              "on-primary-fixed": "#1e3a8a",
-              "secondary-fixed": "#f1f5f9",
-              "inverse-on-surface": "#f1f5f9",
-              "on-primary": "#ffffff",
-              "error-container": "#fee2e2",
-              "inverse-primary": "#93c5fd",
-              "surface-container-lowest": "#ffffff",
-              "surface-variant": "#f1f5f9",
-              primary: "#137fec",
-              "surface-container-high": "#e2e8f0",
-              "on-secondary-container": "#334155",
-              surface: "#ffffff",
-              "on-surface": "#0f172a",
-              "tertiary-container": "#ffedd5",
-              "secondary-container": "#f1f5f9",
-              "on-error-container": "#991b1b",
-              "on-primary-container": "#1e40af",
-              "on-surface-variant": "#475569",
-              "on-tertiary": "#ffffff",
-              error: "#ef4444",
-              "surface-container": "#f1f5f9",
-              "secondary-fixed-dim": "#e2e8f0",
-              "on-secondary": "#ffffff",
-              "primary-fixed": "#dbeafe",
-              "primary-container": "#dbeafe",
-              "primary-fixed-dim": "#bfdbfe",
-            },
-            fontFamily: {
-              headline: ["Lexend"],
-              body: ["Lexend"],
-              label: ["Lexend"],
-            },
-            borderRadius: {
-              DEFAULT: "0.25rem",
-              lg: "0.5rem",
-              xl: "0.75rem",
-              full: "9999px",
-            },
-          },
-        },
-      };
-    </script>
-    <style>
-      body {
-        font-family: "Lexend", sans-serif;
-      }
-      .material-symbols-outlined {
-        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
-      }
-      /* Modal backdrop */
-      .modal-backdrop {
-        background: rgba(15, 23, 42, 0.5);
-        backdrop-filter: blur(4px);
-      }
-      /* Fade in animation */
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(8px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-      .animate-fade-in {
-        animation: fadeIn 0.2s ease-out;
-      }
-      /* Toast */
-      @keyframes slideInRight {
-        from { opacity: 0; transform: translateX(100%); }
-        to { opacity: 1; transform: translateX(0); }
-      }
-      .animate-slide-in {
-        animation: slideInRight 0.3s ease-out;
-      }
-    </style>
-  </head>
-  <body class="bg-background text-on-background min-h-screen">
-    <!-- SideNavBar -->
-    <aside
-      class="bg-slate-900 dark:bg-slate-950 h-screen w-64 fixed left-0 top-0 overflow-y-auto shadow-xl flex flex-col py-6 z-50"
-    >
-      <div class="px-6 mb-10">
-        <h1 class="text-xl font-extrabold text-white tracking-tighter">
-          Midnight Academy
-        </h1>
-        <p
-          class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mt-1"
+    <head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>Quản lý sinh viên - Midnight Academy</title>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+            rel="stylesheet"
+        />
+        <script id="tailwind-config">
+            tailwind.config = {
+                darkMode: 'class',
+                theme: {
+                    extend: {
+                        colors: {
+                            'inverse-surface': '#1e293b',
+                            'surface-container-low': '#f8fafc',
+                            'surface-bright': '#ffffff',
+                            'surface-tint': '#137fec',
+                            'surface-dim': '#f6f7f8',
+                            secondary: '#475569',
+                            'tertiary-fixed': '#ffedd5',
+                            outline: '#e2e8f0',
+                            'on-background': '#0f172a',
+                            tertiary: '#ea580c',
+                            background: '#f6f7f8',
+                            'on-error': '#ffffff',
+                            'outline-variant': '#cbd5e1',
+                            'surface-container-highest': '#cbd5e1',
+                            'on-primary-fixed': '#1e3a8a',
+                            'secondary-fixed': '#f1f5f9',
+                            'inverse-on-surface': '#f1f5f9',
+                            'on-primary': '#ffffff',
+                            'error-container': '#fee2e2',
+                            'inverse-primary': '#93c5fd',
+                            'surface-container-lowest': '#ffffff',
+                            'surface-variant': '#f1f5f9',
+                            primary: '#137fec',
+                            'surface-container-high': '#e2e8f0',
+                            'on-secondary-container': '#334155',
+                            surface: '#ffffff',
+                            'on-surface': '#0f172a',
+                            'tertiary-container': '#ffedd5',
+                            'secondary-container': '#f1f5f9',
+                            'on-error-container': '#991b1b',
+                            'on-primary-container': '#1e40af',
+                            'on-surface-variant': '#475569',
+                            'on-tertiary': '#ffffff',
+                            error: '#ef4444',
+                            'surface-container': '#f1f5f9',
+                            'secondary-fixed-dim': '#e2e8f0',
+                            'on-secondary': '#ffffff',
+                            'primary-fixed': '#dbeafe',
+                            'primary-container': '#dbeafe',
+                            'primary-fixed-dim': '#bfdbfe',
+                        },
+                        fontFamily: {
+                            headline: ['Lexend'],
+                            body: ['Lexend'],
+                            label: ['Lexend'],
+                        },
+                        borderRadius: {
+                            DEFAULT: '0.25rem',
+                            lg: '0.5rem',
+                            xl: '0.75rem',
+                            full: '9999px',
+                        },
+                    },
+                },
+            }
+        </script>
+        <style>
+            body {
+                font-family: 'Lexend', sans-serif;
+            }
+            .material-symbols-outlined {
+                font-variation-settings:
+                    'FILL' 0,
+                    'wght' 400,
+                    'GRAD' 0,
+                    'opsz' 24;
+            }
+            /* Modal backdrop */
+            .modal-backdrop {
+                background: rgba(15, 23, 42, 0.5);
+                backdrop-filter: blur(4px);
+            }
+            /* Fade in animation */
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(8px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            .animate-fade-in {
+                animation: fadeIn 0.2s ease-out;
+            }
+            /* Toast */
+            @keyframes slideInRight {
+                from {
+                    opacity: 0;
+                    transform: translateX(100%);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            .animate-slide-in {
+                animation: slideInRight 0.3s ease-out;
+            }
+        </style>
+    </head>
+    <body class="bg-background text-on-background min-h-screen">
+        <!-- SideNavBar -->
+        <aside
+            class="bg-slate-900 dark:bg-slate-950 h-screen w-64 fixed left-0 top-0 overflow-y-auto shadow-xl flex flex-col py-6 z-50"
         >
-          Hệ thống quản lý giáo viên
-        </p>
-      </div>
-      <nav class="flex-1 space-y-1 px-3">
-        <a
-          class="flex items-center px-4 py-3 rounded-xl transition-colors duration-200 text-slate-400 hover:text-slate-100 hover:bg-slate-800 group font-lexend tracking-tight text-sm font-medium"
-          href="#"
-        >
-          <span class="material-symbols-outlined mr-3" data-icon="dashboard"
-            >dashboard</span
-          >
-          Tổng quan
-        </a>
-       
-        <a
-          class="flex items-center px-4 py-3 rounded-xl transition-colors duration-200 text-slate-400 hover:text-slate-100 hover:bg-slate-800 group font-lexend tracking-tight text-sm font-medium"
-          href="schedule.html"
-        >
-          <span
-            class="material-symbols-outlined mr-3"
-            data-icon="calendar_month"
-            >calendar_month</span
-          >
-          Lịch dạy của tôi
-        </a>
-         <!-- Active State: Quản lý sinh viên -->
-        <a
-          class="flex items-center px-4 py-3 rounded-xl transition-colors duration-200 bg-blue-600/10 text-blue-400 border-l-4 border-blue-500 font-bold font-lexend tracking-tight text-sm scale-95 active:scale-100 transition-transform"
-          href="#"
-        >
-          <span
-            class="material-symbols-outlined mr-3"
-            data-icon="group"
-            style="font-variation-settings: 'FILL' 1"
-            >group</span
-          >
-          Quản lý sinh viên
-        </a>
-        <a
-          class="flex items-center px-4 py-3 rounded-xl transition-colors duration-200 text-slate-400 hover:text-slate-100 hover:bg-slate-800 group font-lexend tracking-tight text-sm font-medium"
-          href="#"
-        >
-          <span class="material-symbols-outlined mr-3" data-icon="groups"
-            >groups</span
-          >
-          Quản lý lớp học
-        </a>
-        <a
-          class="flex items-center px-4 py-3 rounded-xl transition-colors duration-200 text-slate-400 hover:text-slate-100 hover:bg-slate-800 group font-lexend tracking-tight text-sm font-medium"
-          href="#"
-        >
-          <span class="material-symbols-outlined mr-3" data-icon="edit_square"
-            >edit_square</span
-          >
-          Nhập điểm
-        </a>
-        <a
-          class="flex items-center px-4 py-3 rounded-xl transition-colors duration-200 text-slate-400 hover:text-slate-100 hover:bg-slate-800 group font-lexend tracking-tight text-sm font-medium"
-          href="#"
-        >
-          <span class="material-symbols-outlined mr-3" data-icon="payments"
-            >payments</span
-          >
-          Học phí lớp chủ nhiệm
-        </a>
-      </nav>
-      <div class="px-3 pt-6 mt-6 border-t border-slate-800/50">
-        <a
-          class="flex items-center px-4 py-3 rounded-xl text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition-colors duration-200 font-lexend tracking-tight text-sm font-medium"
-          href="#"
-        >
-          <span class="material-symbols-outlined mr-3" data-icon="settings"
-            >settings</span
-          >
-          Cài đặt
-        </a>
-        <a
-          id="btn-logout"
-          class="flex items-center px-4 py-3 rounded-xl text-error/80 hover:text-error hover:bg-red-500/10 transition-colors duration-200 font-lexend tracking-tight text-sm font-medium cursor-pointer"
-        >
-          <span class="material-symbols-outlined mr-3" data-icon="logout"
-            >logout</span
-          >
-          Đăng xuất
-        </a>
-      </div>
-    </aside>
+            <div class="px-6 mb-10">
+                <h1 class="text-xl font-extrabold text-white tracking-tighter">Midnight Academy</h1>
+                <p class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mt-1">
+                    Hệ thống quản lý giáo viên
+                </p>
+            </div>
+            <nav class="flex-1 space-y-1 px-3">
+                <a
+                    class="flex items-center px-4 py-3 rounded-xl transition-colors duration-200 text-slate-400 hover:text-slate-100 hover:bg-slate-800 group font-lexend tracking-tight text-sm font-medium"
+                    href="#"
+                >
+                    <span class="material-symbols-outlined mr-3" data-icon="dashboard">dashboard</span>
+                    Tổng quan
+                </a>
 
-    <!-- TopNavBar -->
-    <header
-      class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 z-40 bg-white/80 backdrop-blur-md shadow-sm border-b border-slate-100 flex justify-between items-center px-8"
-    >
-      <div class="flex items-center gap-4 flex-1">
-        <div class="relative w-full max-w-md">
-          <span
-            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg"
-            data-icon="search"
-            >search</span
-          >
-          <input
-            id="search-input"
-            class="w-full bg-slate-50 border-none rounded-xl pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 transition-all outline-none"
-            placeholder="Tìm kiếm sinh viên theo tên, MSSV..."
-            type="text"
-          />
-        </div>
-      </div>
-      <div class="flex items-center gap-6">
-        <div class="flex items-center gap-4">
-          <button
-            class="relative text-slate-600 hover:text-blue-500 transition-colors opacity-80 hover:opacity-100"
-          >
-            <span class="material-symbols-outlined" data-icon="notifications"
-              >notifications</span
-            >
-          </button>
-          <button
-            class="text-slate-600 hover:text-blue-500 transition-colors opacity-80 hover:opacity-100"
-          >
-            <span class="material-symbols-outlined" data-icon="help"
-              >help</span
-            >
-          </button>
-        </div>
-        <div class="h-8 w-[1px] bg-slate-200"></div>
-        <div class="flex items-center gap-3">
-          <div class="text-right">
-            <p
-              id="user-name"
-              class="text-sm font-bold text-on-surface font-lexend"
-            >
-              —
-            </p>
-            <p
-              id="user-title"
-              class="text-[10px] text-slate-500 font-bold uppercase tracking-tighter"
-            >
-              —
-            </p>
-          </div>
-          <div
-            id="user-avatar"
-            class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white font-extrabold text-sm select-none ring-2 ring-primary-container shadow-sm"
-          >
-            ?
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="ml-64 pt-24 px-8 pb-12">
-      <div class="max-w-7xl mx-auto">
-        <!-- Header Section -->
-        <div
-          class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8"
-        >
-          <div>
-            <nav class="flex text-xs text-slate-500 gap-2 mb-2">
-              <span class="hover:text-primary cursor-pointer">Trang chủ</span>
-              <span>/</span>
-              <span class="text-slate-900 font-medium">Quản lý sinh viên</span>
+                <a
+                    class="flex items-center px-4 py-3 rounded-xl transition-colors duration-200 text-slate-400 hover:text-slate-100 hover:bg-slate-800 group font-lexend tracking-tight text-sm font-medium"
+                    href="schedule.html"
+                >
+                    <span class="material-symbols-outlined mr-3" data-icon="calendar_month">calendar_month</span>
+                    Lịch dạy của tôi
+                </a>
+                <!-- Active State: Quản lý sinh viên -->
+                <a
+                    class="flex items-center px-4 py-3 rounded-xl transition-colors duration-200 bg-blue-600/10 text-blue-400 border-l-4 border-blue-500 font-bold font-lexend tracking-tight text-sm scale-95 active:scale-100 transition-transform"
+                    href="#"
+                >
+                    <span
+                        class="material-symbols-outlined mr-3"
+                        data-icon="group"
+                        style="font-variation-settings: 'FILL' 1"
+                        >group</span
+                    >
+                    Quản lý sinh viên
+                </a>
+                <a
+                    class="flex items-center px-4 py-3 rounded-xl transition-colors duration-200 text-slate-400 hover:text-slate-100 hover:bg-slate-800 group font-lexend tracking-tight text-sm font-medium"
+                    href="#"
+                >
+                    <span class="material-symbols-outlined mr-3" data-icon="groups">groups</span>
+                    Quản lý lớp học
+                </a>
+                <a
+                    class="flex items-center px-4 py-3 rounded-xl transition-colors duration-200 text-slate-400 hover:text-slate-100 hover:bg-slate-800 group font-lexend tracking-tight text-sm font-medium"
+                    href="grades.html"
+                >
+                    <span class="material-symbols-outlined mr-3" data-icon="edit_square">edit_square</span>
+                    Nhập điểm
+                </a>
+                <a
+                    class="flex items-center px-4 py-3 rounded-xl transition-colors duration-200 text-slate-400 hover:text-slate-100 hover:bg-slate-800 group font-lexend tracking-tight text-sm font-medium"
+                    href="#"
+                >
+                    <span class="material-symbols-outlined mr-3" data-icon="payments">payments</span>
+                    Học phí lớp chủ nhiệm
+                </a>
             </nav>
-            <h2
-              class="text-3xl font-extrabold text-slate-900 tracking-tight"
-            >
-              Danh sách sinh viên
-            </h2>
-            <p id="subtitle" class="text-slate-500 mt-1">
-              Quản lý và theo dõi thông tin chi tiết của sinh viên trong hệ thống.
-            </p>
-          </div>
-          <button
-            id="btn-add-student"
-            class="flex items-center justify-center gap-2 bg-primary text-on-primary px-6 py-3 rounded-xl font-semibold shadow-lg shadow-primary/20 hover:opacity-90 active:scale-95 transition-all"
-          >
-            <span class="material-symbols-outlined" data-icon="person_add"
-              >person_add</span
-            >
-            <span>Thêm sinh viên mới</span>
-          </button>
-        </div>
+            <div class="px-3 pt-6 mt-6 border-t border-slate-800/50">
+                <a
+                    class="flex items-center px-4 py-3 rounded-xl text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition-colors duration-200 font-lexend tracking-tight text-sm font-medium"
+                    href="#"
+                >
+                    <span class="material-symbols-outlined mr-3" data-icon="settings">settings</span>
+                    Cài đặt
+                </a>
+                <a
+                    id="btn-logout"
+                    class="flex items-center px-4 py-3 rounded-xl text-error/80 hover:text-error hover:bg-red-500/10 transition-colors duration-200 font-lexend tracking-tight text-sm font-medium cursor-pointer"
+                >
+                    <span class="material-symbols-outlined mr-3" data-icon="logout">logout</span>
+                    Đăng xuất
+                </a>
+            </div>
+        </aside>
 
-        <!-- Stats Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div
-            class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-4"
-          >
-            <div
-              class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center"
-            >
-              <span class="material-symbols-outlined" data-icon="groups"
-                >groups</span
-              >
-            </div>
-            <div>
-              <p class="text-xs text-slate-500 font-medium uppercase">
-                Tổng sinh viên
-              </p>
-              <p id="stat-total" class="text-xl font-bold text-slate-900">—</p>
-            </div>
-          </div>
-          <div
-            class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-4"
-          >
-            <div
-              class="w-12 h-12 bg-green-50 text-green-600 rounded-xl flex items-center justify-center"
-            >
-              <span class="material-symbols-outlined" data-icon="check_circle"
-                >check_circle</span
-              >
-            </div>
-            <div>
-              <p class="text-xs text-slate-500 font-medium uppercase">
-                Đang theo học
-              </p>
-              <p id="stat-active" class="text-xl font-bold text-slate-900">—</p>
-            </div>
-          </div>
-          <div
-            class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-4"
-          >
-            <div
-              class="w-12 h-12 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center"
-            >
-              <span class="material-symbols-outlined" data-icon="school"
-                >school</span
-              >
-            </div>
-            <div>
-              <p class="text-xs text-slate-500 font-medium uppercase">
-                Số lớp học
-              </p>
-              <p id="stat-classes" class="text-xl font-bold text-slate-900">—</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Table Controls -->
-        <div
-          class="bg-white rounded-t-3xl border-t border-x border-slate-100 p-6 flex flex-wrap items-center justify-between gap-4"
+        <!-- TopNavBar -->
+        <header
+            class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 z-40 bg-white/80 backdrop-blur-md shadow-sm border-b border-slate-100 flex justify-between items-center px-8"
         >
-          <div class="flex items-center gap-3">
-            <div class="relative">
-              <select
-                id="filter-class"
-                class="appearance-none bg-slate-50 border-slate-200 text-sm rounded-lg py-2 pl-4 pr-10 focus:ring-primary focus:border-primary"
-              >
-                <option value="">Tất cả các lớp</option>
-              </select>
-              <span
-                class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-sm"
-                data-icon="expand_more"
-                >expand_more</span
-              >
+            <div class="flex items-center gap-4 flex-1">
+                <div class="relative w-full max-w-md">
+                    <span
+                        class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg"
+                        data-icon="search"
+                        >search</span
+                    >
+                    <input
+                        id="search-input"
+                        class="w-full bg-slate-50 border-none rounded-xl pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 transition-all outline-none"
+                        placeholder="Tìm kiếm sinh viên theo tên, MSSV..."
+                        type="text"
+                    />
+                </div>
             </div>
-            <div class="relative">
-              <select
-                id="filter-gender"
-                class="appearance-none bg-slate-50 border-slate-200 text-sm rounded-lg py-2 pl-4 pr-10 focus:ring-primary focus:border-primary"
-              >
-                <option value="">Giới tính</option>
-                <option value="male">Nam</option>
-                <option value="female">Nữ</option>
-                <option value="other">Khác</option>
-              </select>
-              <span
-                class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-sm"
-                data-icon="expand_more"
-                >expand_more</span
-              >
+            <div class="flex items-center gap-6">
+                <div class="flex items-center gap-4">
+                    <button
+                        class="relative text-slate-600 hover:text-blue-500 transition-colors opacity-80 hover:opacity-100"
+                    >
+                        <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+                    </button>
+                    <button class="text-slate-600 hover:text-blue-500 transition-colors opacity-80 hover:opacity-100">
+                        <span class="material-symbols-outlined" data-icon="help">help</span>
+                    </button>
+                </div>
+                <div class="h-8 w-[1px] bg-slate-200"></div>
+                <div class="flex items-center gap-3">
+                    <div class="text-right">
+                        <p id="user-name" class="text-sm font-bold text-on-surface font-lexend">—</p>
+                        <p id="user-title" class="text-[10px] text-slate-500 font-bold uppercase tracking-tighter">—</p>
+                    </div>
+                    <div
+                        id="user-avatar"
+                        class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white font-extrabold text-sm select-none ring-2 ring-primary-container shadow-sm"
+                    >
+                        ?
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="flex items-center gap-2">
-            <p id="display-count" class="text-sm text-slate-500 mr-2">
-              —
-            </p>
-            <button
-              id="btn-prev-page"
-              class="p-2 border border-slate-200 rounded-lg text-slate-400 hover:bg-slate-50 disabled:opacity-50"
-              disabled
-            >
-              <span class="material-symbols-outlined" data-icon="chevron_left"
-                >chevron_left</span
-              >
-            </button>
-            <button
-              id="btn-next-page"
-              class="p-2 border border-slate-200 rounded-lg text-slate-600 hover:bg-slate-50 disabled:opacity-50"
-              disabled
-            >
-              <span class="material-symbols-outlined" data-icon="chevron_right"
-                >chevron_right</span
-              >
-            </button>
-          </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="ml-64 pt-24 px-8 pb-12">
+            <div class="max-w-7xl mx-auto">
+                <!-- Header Section -->
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+                    <div>
+                        <nav class="flex text-xs text-slate-500 gap-2 mb-2">
+                            <span class="hover:text-primary cursor-pointer">Trang chủ</span>
+                            <span>/</span>
+                            <span class="text-slate-900 font-medium">Quản lý sinh viên</span>
+                        </nav>
+                        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">Danh sách sinh viên</h2>
+                        <p id="subtitle" class="text-slate-500 mt-1">
+                            Quản lý và theo dõi thông tin chi tiết của sinh viên trong hệ thống.
+                        </p>
+                    </div>
+                    <button
+                        id="btn-add-student"
+                        class="flex items-center justify-center gap-2 bg-primary text-on-primary px-6 py-3 rounded-xl font-semibold shadow-lg shadow-primary/20 hover:opacity-90 active:scale-95 transition-all"
+                    >
+                        <span class="material-symbols-outlined" data-icon="person_add">person_add</span>
+                        <span>Thêm sinh viên mới</span>
+                    </button>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-4">
+                        <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center">
+                            <span class="material-symbols-outlined" data-icon="groups">groups</span>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 font-medium uppercase">Tổng sinh viên</p>
+                            <p id="stat-total" class="text-xl font-bold text-slate-900">—</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-4">
+                        <div class="w-12 h-12 bg-green-50 text-green-600 rounded-xl flex items-center justify-center">
+                            <span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 font-medium uppercase">Đang theo học</p>
+                            <p id="stat-active" class="text-xl font-bold text-slate-900">—</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-4">
+                        <div class="w-12 h-12 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center">
+                            <span class="material-symbols-outlined" data-icon="school">school</span>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 font-medium uppercase">Số lớp học</p>
+                            <p id="stat-classes" class="text-xl font-bold text-slate-900">—</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Table Controls -->
+                <div
+                    class="bg-white rounded-t-3xl border-t border-x border-slate-100 p-6 flex flex-wrap items-center justify-between gap-4"
+                >
+                    <div class="flex items-center gap-3">
+                        <div class="relative">
+                            <select
+                                id="filter-class"
+                                class="appearance-none bg-slate-50 border-slate-200 text-sm rounded-lg py-2 pl-4 pr-10 focus:ring-primary focus:border-primary"
+                            >
+                                <option value="">Tất cả các lớp</option>
+                            </select>
+                            <span
+                                class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-sm"
+                                data-icon="expand_more"
+                                >expand_more</span
+                            >
+                        </div>
+                        <div class="relative">
+                            <select
+                                id="filter-gender"
+                                class="appearance-none bg-slate-50 border-slate-200 text-sm rounded-lg py-2 pl-4 pr-10 focus:ring-primary focus:border-primary"
+                            >
+                                <option value="">Giới tính</option>
+                                <option value="male">Nam</option>
+                                <option value="female">Nữ</option>
+                            </select>
+                            <span
+                                class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-sm"
+                                data-icon="expand_more"
+                                >expand_more</span
+                            >
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <p id="display-count" class="text-sm text-slate-500 mr-2">—</p>
+                        <button
+                            id="btn-prev-page"
+                            class="p-2 border border-slate-200 rounded-lg text-slate-400 hover:bg-slate-50 disabled:opacity-50"
+                            disabled
+                        >
+                            <span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+                        </button>
+                        <button
+                            id="btn-next-page"
+                            class="p-2 border border-slate-200 rounded-lg text-slate-600 hover:bg-slate-50 disabled:opacity-50"
+                            disabled
+                        >
+                            <span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Data Table -->
+                <div
+                    class="bg-white border border-slate-100 rounded-b-3xl overflow-hidden shadow-xl shadow-slate-200/50"
+                >
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50/50 border-b border-slate-100">
+                                <th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider">
+                                    MSSV
+                                </th>
+                                <th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider">
+                                    Họ và tên
+                                </th>
+                                <th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider">
+                                    Thông tin liên hệ
+                                </th>
+                                <th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider">
+                                    Ngày sinh / GT
+                                </th>
+                                <th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider">
+                                    Lớp học
+                                </th>
+                                <th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider">
+                                    Niên khóa
+                                </th>
+                                <th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider">
+                                    Trạng thái
+                                </th>
+                                <th
+                                    class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider text-right"
+                                >
+                                    Thao tác
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="student-table-body" class="divide-y divide-slate-100">
+                            <tr>
+                                <td colspan="8" class="py-16 text-center text-slate-400">
+                                    <span class="material-symbols-outlined text-4xl animate-spin mr-2"
+                                        >progress_activity</span
+                                    >
+                                    <span class="text-sm">Đang tải dữ liệu...</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Footer Pagination -->
+                <div class="mt-6 flex flex-col md:flex-row justify-between items-center text-slate-500 text-sm gap-4">
+                    <p id="pagination-info">—</p>
+                    <div id="pagination-buttons" class="flex items-center gap-1"></div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Modal: Add/Edit Student -->
+        <div id="student-modal" class="fixed inset-0 z-[60] hidden items-center justify-center modal-backdrop">
+            <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg mx-4 animate-fade-in relative">
+                <div class="absolute top-0 left-0 w-full h-1.5 bg-primary rounded-t-2xl"></div>
+                <div class="p-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 id="modal-title" class="text-xl font-extrabold text-slate-900 tracking-tight">
+                            Thêm sinh viên mới
+                        </h3>
+                        <button id="btn-close-modal" class="text-slate-400 hover:text-slate-600 transition-colors p-1">
+                            <span class="material-symbols-outlined">close</span>
+                        </button>
+                    </div>
+                    <form id="student-form" class="space-y-4">
+                        <input type="hidden" id="form-student-id" value="" />
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant"
+                                    >Họ</label
+                                >
+                                <input
+                                    id="form-last-name"
+                                    type="text"
+                                    required
+                                    class="w-full bg-surface-container-low border-transparent rounded-xl py-3 px-4 text-sm font-medium text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all outline-none"
+                                    placeholder="Nguyễn Văn"
+                                />
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant"
+                                    >Tên</label
+                                >
+                                <input
+                                    id="form-first-name"
+                                    type="text"
+                                    required
+                                    class="w-full bg-surface-container-low border-transparent rounded-xl py-3 px-4 text-sm font-medium text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all outline-none"
+                                    placeholder="An"
+                                />
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant"
+                                >Mã sinh viên</label
+                            >
+                            <input
+                                id="form-code"
+                                type="text"
+                                required
+                                class="w-full bg-surface-container-low border-transparent rounded-xl py-3 px-4 text-sm font-medium text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all outline-none"
+                                placeholder="20120456"
+                            />
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant"
+                                >Email</label
+                            >
+                            <input
+                                id="form-email"
+                                type="email"
+                                required
+                                class="w-full bg-surface-container-low border-transparent rounded-xl py-3 px-4 text-sm font-medium text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all outline-none"
+                                placeholder="an.nv@student.edu.vn"
+                            />
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant"
+                                    >Ngày sinh (DD-MM-YYYY)</label
+                                >
+                                <input
+                                    id="form-birthday"
+                                    type="text"
+                                    required
+                                    class="w-full bg-surface-container-low border-transparent rounded-xl py-3 px-4 text-sm font-medium text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all outline-none"
+                                    placeholder="15-05-2002"
+                                />
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant"
+                                    >Giới tính</label
+                                >
+                                <select
+                                    id="form-gender"
+                                    required
+                                    class="w-full bg-surface-container-low border-transparent rounded-xl py-3 px-4 text-sm font-medium text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all outline-none"
+                                >
+                                    <option value="">Chọn giới tính</option>
+                                    <option value="male">Nam</option>
+                                    <option value="female">Nữ</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant"
+                                >Số điện thoại</label
+                            >
+                            <input
+                                id="form-phone"
+                                type="text"
+                                required
+                                class="w-full bg-surface-container-low border-transparent rounded-xl py-3 px-4 text-sm font-medium text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all outline-none"
+                                placeholder="0987654321"
+                            />
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant"
+                                >Địa chỉ</label
+                            >
+                            <input
+                                id="form-address"
+                                type="text"
+                                required
+                                class="w-full bg-surface-container-low border-transparent rounded-xl py-3 px-4 text-sm font-medium text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all outline-none"
+                                placeholder="TP. Hồ Chí Minh"
+                            />
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant"
+                                    >Lớp học</label
+                                >
+                                <select
+                                    id="form-class"
+                                    required
+                                    class="w-full bg-surface-container-low border-transparent rounded-xl py-3 px-4 text-sm font-medium text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all outline-none"
+                                >
+                                    <option value="">Chọn lớp học</option>
+                                </select>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant"
+                                    >Niên khóa</label
+                                >
+                                <input
+                                    id="form-year"
+                                    type="text"
+                                    required
+                                    class="w-full bg-surface-container-low border-transparent rounded-xl py-3 px-4 text-sm font-medium text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all outline-none"
+                                    placeholder="2022-2026"
+                                />
+                            </div>
+                        </div>
+                        <!-- Error Message -->
+                        <div
+                            id="form-error"
+                            class="hidden bg-error-container text-on-error-container text-sm font-medium px-4 py-3 rounded-xl items-center gap-2"
+                        >
+                            <span class="material-symbols-outlined text-[18px]">error</span>
+                            <span id="form-error-text"></span>
+                        </div>
+                        <button
+                            id="form-submit"
+                            type="submit"
+                            class="w-full bg-primary text-white py-3.5 rounded-xl font-bold text-sm shadow-lg shadow-primary/25 hover:bg-primary/90 hover:scale-[0.98] transition-all flex items-center justify-center gap-2 mt-2"
+                        >
+                            <span class="material-symbols-outlined text-[20px]">save</span>
+                            <span>Lưu sinh viên</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
 
-        <!-- Data Table -->
-        <div
-          class="bg-white border border-slate-100 rounded-b-3xl overflow-hidden shadow-xl shadow-slate-200/50"
-        >
-          <table class="w-full text-left border-collapse">
-            <thead>
-              <tr class="bg-slate-50/50 border-b border-slate-100">
-                <th
-                  class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider"
+        <!-- Delete Confirmation Modal -->
+        <div id="delete-modal" class="fixed inset-0 z-[60] hidden items-center justify-center modal-backdrop">
+            <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm mx-4 animate-fade-in p-8 text-center">
+                <div
+                    class="w-16 h-16 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-4"
                 >
-                  MSSV
-                </th>
-                <th
-                  class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider"
-                >
-                  Họ và tên
-                </th>
-                <th
-                  class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider"
-                >
-                  Thông tin liên hệ
-                </th>
-                <th
-                  class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider"
-                >
-                  Ngày sinh / GT
-                </th>
-                <th
-                  class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider"
-                >
-                  Lớp học
-                </th>
-                <th
-                  class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider"
-                >
-                  Niên khóa
-                </th>
-                <th
-                  class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider"
-                >
-                  Trạng thái
-                </th>
-                <th
-                  class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-wider text-right"
-                >
-                  Thao tác
-                </th>
-              </tr>
-            </thead>
-            <tbody id="student-table-body" class="divide-y divide-slate-100">
-              <tr>
-                <td colspan="8" class="py-16 text-center text-slate-400">
-                  <span
-                    class="material-symbols-outlined text-4xl animate-spin mr-2"
-                    >progress_activity</span
-                  >
-                  <span class="text-sm">Đang tải dữ liệu...</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                    <span class="material-symbols-outlined text-3xl">delete_forever</span>
+                </div>
+                <h3 class="text-lg font-extrabold text-slate-900 mb-2">Xác nhận xóa sinh viên</h3>
+                <p id="delete-student-name" class="text-sm text-slate-500 mb-6">Bạn có chắc muốn xóa sinh viên này?</p>
+                <div class="flex gap-3">
+                    <button
+                        id="btn-cancel-delete"
+                        class="flex-1 py-3 rounded-xl border border-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-50 transition-all"
+                    >
+                        Hủy bỏ
+                    </button>
+                    <button
+                        id="btn-confirm-delete"
+                        class="flex-1 py-3 rounded-xl bg-error text-white font-bold text-sm hover:bg-red-600 transition-all"
+                    >
+                        Xóa
+                    </button>
+                </div>
+            </div>
         </div>
 
-        <!-- Footer Pagination -->
-        <div
-          class="mt-6 flex flex-col md:flex-row justify-between items-center text-slate-500 text-sm gap-4"
-        >
-          <p id="pagination-info">—</p>
-          <div id="pagination-buttons" class="flex items-center gap-1"></div>
-        </div>
-      </div>
-    </main>
+        <!-- Toast Container -->
+        <div id="toast-container" class="fixed top-20 right-8 z-[70] space-y-3"></div>
 
-    <!-- Modal: Add/Edit Student -->
-    <div
-      id="student-modal"
-      class="fixed inset-0 z-[60] hidden items-center justify-center modal-backdrop"
-    >
-      <div
-        class="bg-white rounded-2xl shadow-2xl w-full max-w-lg mx-4 animate-fade-in relative"
-      >
-        <div class="absolute top-0 left-0 w-full h-1.5 bg-primary rounded-t-2xl"></div>
-        <div class="p-8">
-          <div class="flex items-center justify-between mb-6">
-            <h3
-              id="modal-title"
-              class="text-xl font-extrabold text-slate-900 tracking-tight"
-            >
-              Thêm sinh viên mới
-            </h3>
-            <button
-              id="btn-close-modal"
-              class="text-slate-400 hover:text-slate-600 transition-colors p-1"
-            >
-              <span class="material-symbols-outlined">close</span>
-            </button>
-          </div>
-          <form id="student-form" class="space-y-4">
-            <input type="hidden" id="form-student-id" value="" />
-            <div class="grid grid-cols-2 gap-4">
-              <div class="space-y-1">
-                <label
-                  class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant"
-                  >Họ</label
-                >
-                <input
-                  id="form-last-name"
-                  type="text"
-                  required
-                  class="w-full bg-surface-container-low border-transparent rounded-xl py-3 px-4 text-sm font-medium text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all outline-none"
-                  placeholder="Nguyễn Văn"
-                />
-              </div>
-              <div class="space-y-1">
-                <label
-                  class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant"
-                  >Tên</label
-                >
-                <input
-                  id="form-first-name"
-                  type="text"
-                  required
-                  class="w-full bg-surface-container-low border-transparent rounded-xl py-3 px-4 text-sm font-medium text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all outline-none"
-                  placeholder="An"
-                />
-              </div>
-            </div>
-            <div class="space-y-1">
-              <label
-                class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant"
-                >Mã sinh viên</label
-              >
-              <input
-                id="form-code"
-                type="text"
-                required
-                class="w-full bg-surface-container-low border-transparent rounded-xl py-3 px-4 text-sm font-medium text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all outline-none"
-                placeholder="20120456"
-              />
-            </div>
-            <div class="space-y-1">
-              <label
-                class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant"
-                >Email</label
-              >
-              <input
-                id="form-email"
-                type="email"
-                required
-                class="w-full bg-surface-container-low border-transparent rounded-xl py-3 px-4 text-sm font-medium text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all outline-none"
-                placeholder="an.nv@student.edu.vn"
-              />
-            </div>
-            <div class="grid grid-cols-2 gap-4">
-              <div class="space-y-1">
-                <label
-                  class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant"
-                  >Ngày sinh (DD-MM-YYYY)</label
-                >
-                <input
-                  id="form-birthday"
-                  type="text"
-                  required
-                  class="w-full bg-surface-container-low border-transparent rounded-xl py-3 px-4 text-sm font-medium text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all outline-none"
-                  placeholder="15-05-2002"
-                />
-              </div>
-              <div class="space-y-1">
-                <label
-                  class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant"
-                  >Giới tính</label
-                >
-                <select
-                  id="form-gender"
-                  required
-                  class="w-full bg-surface-container-low border-transparent rounded-xl py-3 px-4 text-sm font-medium text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all outline-none"
-                >
-                  <option value="">Chọn giới tính</option>
-                  <option value="male">Nam</option>
-                  <option value="female">Nữ</option>
-                  <option value="other">Khác</option>
-                </select>
-              </div>
-            </div>
-            <div class="space-y-1">
-              <label
-                class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant"
-                >Số điện thoại</label
-              >
-              <input
-                id="form-phone"
-                type="text"
-                required
-                class="w-full bg-surface-container-low border-transparent rounded-xl py-3 px-4 text-sm font-medium text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all outline-none"
-                placeholder="0987654321"
-              />
-            </div>
-            <div class="space-y-1">
-              <label
-                class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant"
-                >Địa chỉ</label
-              >
-              <input
-                id="form-address"
-                type="text"
-                required
-                class="w-full bg-surface-container-low border-transparent rounded-xl py-3 px-4 text-sm font-medium text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all outline-none"
-                placeholder="TP. Hồ Chí Minh"
-              />
-            </div>
-            <div class="grid grid-cols-2 gap-4">
-              <div class="space-y-1">
-                <label
-                  class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant"
-                  >Lớp học</label
-                >
-                <select
-                  id="form-class"
-                  required
-                  class="w-full bg-surface-container-low border-transparent rounded-xl py-3 px-4 text-sm font-medium text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all outline-none"
-                >
-                  <option value="">Chọn lớp học</option>
-                </select>
-              </div>
-              <div class="space-y-1">
-                <label
-                  class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant"
-                  >Niên khóa</label
-                >
-                <input
-                  id="form-year"
-                  type="text"
-                  required
-                  class="w-full bg-surface-container-low border-transparent rounded-xl py-3 px-4 text-sm font-medium text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all outline-none"
-                  placeholder="2022-2026"
-                />
-              </div>
-            </div>
-            <!-- Error Message -->
-            <div
-              id="form-error"
-              class="hidden bg-error-container text-on-error-container text-sm font-medium px-4 py-3 rounded-xl items-center gap-2"
-            >
-              <span class="material-symbols-outlined text-[18px]">error</span>
-              <span id="form-error-text"></span>
-            </div>
-            <button
-              id="form-submit"
-              type="submit"
-              class="w-full bg-primary text-white py-3.5 rounded-xl font-bold text-sm shadow-lg shadow-primary/25 hover:bg-primary/90 hover:scale-[0.98] transition-all flex items-center justify-center gap-2 mt-2"
-            >
-              <span class="material-symbols-outlined text-[20px]"
-                >save</span
-              >
-              <span>Lưu sinh viên</span>
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
+        <script src="api.js"></script>
+        <script>
+            // ==================== STATE ====================
+            let currentPage = 1
+            const perPage = 10
+            let totalStudents = 0
+            let totalPages = 0
+            let allClasses = []
+            let deleteTargetId = null
 
-    <!-- Delete Confirmation Modal -->
-    <div
-      id="delete-modal"
-      class="fixed inset-0 z-[60] hidden items-center justify-center modal-backdrop"
-    >
-      <div
-        class="bg-white rounded-2xl shadow-2xl w-full max-w-sm mx-4 animate-fade-in p-8 text-center"
-      >
-        <div
-          class="w-16 h-16 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-4"
-        >
-          <span class="material-symbols-outlined text-3xl">delete_forever</span>
-        </div>
-        <h3 class="text-lg font-extrabold text-slate-900 mb-2">
-          Xác nhận xóa sinh viên
-        </h3>
-        <p id="delete-student-name" class="text-sm text-slate-500 mb-6">
-          Bạn có chắc muốn xóa sinh viên này?
-        </p>
-        <div class="flex gap-3">
-          <button
-            id="btn-cancel-delete"
-            class="flex-1 py-3 rounded-xl border border-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-50 transition-all"
-          >
-            Hủy bỏ
-          </button>
-          <button
-            id="btn-confirm-delete"
-            class="flex-1 py-3 rounded-xl bg-error text-white font-bold text-sm hover:bg-red-600 transition-all"
-          >
-            Xóa
-          </button>
-        </div>
-      </div>
-    </div>
+            // ==================== INIT ====================
+            async function init() {
+                if (!localStorage.getItem('access_token')) {
+                    window.location.href = 'auth.html'
+                    return
+                }
 
-    <!-- Toast Container -->
-    <div
-      id="toast-container"
-      class="fixed top-20 right-8 z-[70] space-y-3"
-    ></div>
+                try {
+                    await Promise.all([loadCurrentUser(), loadClasses()])
+                    await loadStudents()
+                } catch (err) {
+                    console.error('Init error:', err)
+                }
+            }
 
-    <script src="api.js"></script>
-    <script>
-      // ==================== STATE ====================
-      let currentPage = 1;
-      const perPage = 10;
-      let totalStudents = 0;
-      let totalPages = 0;
-      let allClasses = [];
-      let deleteTargetId = null;
+            // ==================== LOAD CURRENT USER ====================
+            async function loadCurrentUser() {
+                try {
+                    const res = await apiFetch('/auth/me')
+                    const user = res.data || res
+                    const name = user.full_name || user.name || user.username || 'Người dùng'
+                    const title = user.role_label || user.role || ''
+                    document.getElementById('user-name').textContent = name
+                    document.getElementById('user-title').textContent = title
+                    document.getElementById('user-avatar').textContent = name.trim().slice(-1).toUpperCase()
+                } catch (err) {
+                    // silently fail
+                }
+            }
 
-      // ==================== INIT ====================
-      async function init() {
-        if (!localStorage.getItem("access_token")) {
-          window.location.href = "auth.html";
-          return;
-        }
+            // ==================== LOAD CLASSES ====================
+            async function loadClasses() {
+                try {
+                    const res = await apiFetch('/classes?page=1&per_page=999')
+                    allClasses = res.data || []
 
-        try {
-          await Promise.all([loadCurrentUser(), loadClasses()]);
-          await loadStudents();
-        } catch (err) {
-          console.error("Init error:", err);
-        }
-      }
+                    // Populate filter dropdown
+                    const filterSelect = document.getElementById('filter-class')
+                    const formSelect = document.getElementById('form-class')
 
-      // ==================== LOAD CURRENT USER ====================
-      async function loadCurrentUser() {
-        try {
-          const res = await apiFetch("/auth/me");
-          const user = res.data || res;
-          const name =
-            user.full_name || user.name || user.username || "Người dùng";
-          const title = user.role_label || user.role || "";
-          document.getElementById("user-name").textContent = name;
-          document.getElementById("user-title").textContent = title;
-          document.getElementById("user-avatar").textContent = name
-            .trim()
-            .slice(-1)
-            .toUpperCase();
-        } catch (err) {
-          // silently fail
-        }
-      }
+                    allClasses.forEach((cls) => {
+                        const opt1 = new Option(cls.name, cls.id)
+                        const opt2 = new Option(cls.name, cls.id)
+                        filterSelect.appendChild(opt1)
+                        formSelect.appendChild(opt2)
+                    })
 
-      // ==================== LOAD CLASSES ====================
-      async function loadClasses() {
-        try {
-          const res = await apiFetch("/classes?page=1&per_page=999");
-          allClasses = res.data || [];
+                    // Update stat
+                    document.getElementById('stat-classes').textContent = allClasses.length.toLocaleString()
+                } catch (err) {
+                    console.error('Load classes error:', err)
+                }
+            }
 
-          // Populate filter dropdown
-          const filterSelect = document.getElementById("filter-class");
-          const formSelect = document.getElementById("form-class");
-
-          allClasses.forEach((cls) => {
-            const opt1 = new Option(cls.name, cls.id);
-            const opt2 = new Option(cls.name, cls.id);
-            filterSelect.appendChild(opt1);
-            formSelect.appendChild(opt2);
-          });
-
-          // Update stat
-          document.getElementById("stat-classes").textContent =
-            allClasses.length.toLocaleString();
-        } catch (err) {
-          console.error("Load classes error:", err);
-        }
-      }
-
-      // ==================== LOAD STUDENTS ====================
-      async function loadStudents() {
-        const tbody = document.getElementById("student-table-body");
-        tbody.innerHTML = `
+            // ==================== LOAD STUDENTS ====================
+            async function loadStudents() {
+                const tbody = document.getElementById('student-table-body')
+                tbody.innerHTML = `
           <tr>
             <td colspan="7" class="py-16 text-center text-slate-400">
               <span class="material-symbols-outlined text-4xl animate-spin mr-2">progress_activity</span>
               <span class="text-sm">Đang tải dữ liệu...</span>
             </td>
-          </tr>`;
+          </tr>`
 
-        try {
-          const classId = document.getElementById("filter-class").value;
-          let url = `/students?page=${currentPage}&per_page=${perPage}`;
-          if (classId) url += `&class_id=${classId}`;
+                try {
+                    const classId = document.getElementById('filter-class').value
+                    let url = `/students?page=${currentPage}&per_page=${perPage}`
+                    if (classId) url += `&class_id=${classId}`
 
-          const res = await apiFetch(url);
-          const students = res.data || [];
-          const pagination = res.meta?.pagination || {};
+                    const res = await apiFetch(url)
+                    const students = res.data || []
+                    const pagination = res.meta?.pagination || {}
 
-          totalStudents = pagination.total || 0;
-          totalPages = pagination.total_pages || 0;
+                    totalStudents = pagination.total || 0
+                    totalPages = pagination.total_pages || 0
 
-          // Update stats
-          document.getElementById("stat-total").textContent =
-            totalStudents.toLocaleString();
-          document.getElementById("stat-active").textContent =
-            totalStudents.toLocaleString();
-          document.getElementById("subtitle").textContent =
-            `Quản lý và theo dõi thông tin chi tiết của ${totalStudents.toLocaleString()} sinh viên trong hệ thống.`;
+                    // Update stats
+                    document.getElementById('stat-total').textContent = totalStudents.toLocaleString()
+                    document.getElementById('stat-active').textContent = totalStudents.toLocaleString()
+                    document.getElementById('subtitle').textContent =
+                        `Quản lý và theo dõi thông tin chi tiết của ${totalStudents.toLocaleString()} sinh viên trong hệ thống.`
 
-          // Apply client-side gender filter
-          const genderFilter =
-            document.getElementById("filter-gender").value;
-          const searchFilter = document
-            .getElementById("search-input")
-            .value.trim()
-            .toLowerCase();
+                    // Apply client-side gender filter
+                    const genderFilter = document.getElementById('filter-gender').value
+                    const searchFilter = document.getElementById('search-input').value.trim().toLowerCase()
 
-          let filtered = students;
-          if (genderFilter) {
-            filtered = filtered.filter((s) => s.gender === genderFilter);
-          }
-          if (searchFilter) {
-            filtered = filtered.filter((s) => {
-              const fullName = `${s.first_name} ${s.last_name}`.toLowerCase();
-              const code = (s.code || "").toLowerCase();
-              return (
-                fullName.includes(searchFilter) ||
-                code.includes(searchFilter)
-              );
-            });
-          }
+                    let filtered = students
+                    if (genderFilter) {
+                        filtered = filtered.filter((s) => s.gender === genderFilter)
+                    }
+                    if (searchFilter) {
+                        filtered = filtered.filter((s) => {
+                            const fullName = `${s.first_name} ${s.last_name}`.toLowerCase()
+                            const code = (s.code || '').toLowerCase()
+                            return fullName.includes(searchFilter) || code.includes(searchFilter)
+                        })
+                    }
 
-          // Display count
-          document.getElementById("display-count").textContent =
-            `Hiển thị ${filtered.length} / ${totalStudents.toLocaleString()}`;
+                    // Display count
+                    document.getElementById('display-count').textContent =
+                        `Hiển thị ${filtered.length} / ${totalStudents.toLocaleString()}`
 
-          renderTable(filtered);
-          renderPagination();
-          updatePageButtons();
-        } catch (err) {
-          console.error("Load students error:", err);
-          tbody.innerHTML = `
+                    renderTable(filtered)
+                    renderPagination()
+                    updatePageButtons()
+                } catch (err) {
+                    console.error('Load students error:', err)
+                    tbody.innerHTML = `
             <tr>
               <td colspan="8" class="py-16 text-center text-slate-400">
                 <span class="material-symbols-outlined text-3xl mr-2">error</span>
                 <span class="text-sm">Không thể tải dữ liệu. Vui lòng thử lại.</span>
               </td>
-            </tr>`;
-        }
-      }
+            </tr>`
+                }
+            }
 
-      // ==================== RENDER TABLE ====================
-      const AVATAR_COLORS = [
-        ["bg-blue-100", "text-blue-600"],
-        ["bg-purple-100", "text-purple-600"],
-        ["bg-orange-100", "text-orange-600"],
-        ["bg-emerald-100", "text-emerald-600"],
-        ["bg-pink-100", "text-pink-600"],
-        ["bg-cyan-100", "text-cyan-600"],
-        ["bg-amber-100", "text-amber-600"],
-      ];
+            // ==================== RENDER TABLE ====================
+            const AVATAR_COLORS = [
+                ['bg-blue-100', 'text-blue-600'],
+                ['bg-purple-100', 'text-purple-600'],
+                ['bg-orange-100', 'text-orange-600'],
+                ['bg-emerald-100', 'text-emerald-600'],
+                ['bg-pink-100', 'text-pink-600'],
+                ['bg-cyan-100', 'text-cyan-600'],
+                ['bg-amber-100', 'text-amber-600'],
+            ]
 
-      function getInitials(firstName, lastName) {
-        const l = (lastName || "").charAt(0).toUpperCase();
-        const f = (firstName || "").charAt(0).toUpperCase();
-        return l + f || "?";
-      }
+            function getInitials(firstName, lastName) {
+                const l = (lastName || '').charAt(0).toUpperCase()
+                const f = (firstName || '').charAt(0).toUpperCase()
+                return l + f || '?'
+            }
 
-      function formatDate(dateStr) {
-        if (!dateStr) return "—";
-        const d = new Date(dateStr);
-        if (isNaN(d)) return dateStr;
-        const dd = String(d.getDate()).padStart(2, "0");
-        const mm = String(d.getMonth() + 1).padStart(2, "0");
-        const yyyy = d.getFullYear();
-        return `${dd}/${mm}/${yyyy}`;
-      }
+            function formatDate(dateStr) {
+                if (!dateStr) return '—'
+                const d = new Date(dateStr)
+                if (isNaN(d)) return dateStr
+                const dd = String(d.getDate()).padStart(2, '0')
+                const mm = String(d.getMonth() + 1).padStart(2, '0')
+                const yyyy = d.getFullYear()
+                return `${dd}/${mm}/${yyyy}`
+            }
 
-      function genderLabel(g) {
-        if (g === "male") return "Nam";
-        if (g === "female") return "Nữ";
-        return "Khác";
-      }
+            function genderLabel(g) {
+                if (g === 'male') return 'Nam'
+                if (g === 'female') return 'Nữ'
+            }
 
-      function renderTable(students) {
-        const tbody = document.getElementById("student-table-body");
+            function renderTable(students) {
+                const tbody = document.getElementById('student-table-body')
 
-        if (students.length === 0) {
-          tbody.innerHTML = `
+                if (students.length === 0) {
+                    tbody.innerHTML = `
             <tr>
               <td colspan="8" class="py-16 text-center text-slate-400">
                 <span class="material-symbols-outlined text-3xl mr-2">person_off</span>
                 <span class="text-sm">Không tìm thấy sinh viên nào.</span>
               </td>
-            </tr>`;
-          return;
-        }
+            </tr>`
+                    return
+                }
 
-        tbody.innerHTML = students
-          .map((s, idx) => {
-            const colorIdx = (s.id || idx) % AVATAR_COLORS.length;
-            const [bgColor, txtColor] = AVATAR_COLORS[colorIdx];
-            const initials = getInitials(s.first_name, s.last_name);
-            const fullName = `${s.last_name || ""} ${s.first_name || ""}`.trim();
-            const className = s.class?.name || "—";
-            const email = s.email || "—";
-            const phone = s.phone || "—";
+                tbody.innerHTML = students
+                    .map((s, idx) => {
+                        const colorIdx = (s.id || idx) % AVATAR_COLORS.length
+                        const [bgColor, txtColor] = AVATAR_COLORS[colorIdx]
+                        const initials = getInitials(s.first_name, s.last_name)
+                        const fullName = `${s.last_name || ''} ${s.first_name || ''}`.trim()
+                        const className = s.class?.name || '—'
+                        const email = s.email || '—'
+                        const phone = s.phone || '—'
 
-            return `
+                        return `
               <tr class="hover:bg-slate-50/80 transition-colors group">
                 <td class="px-6 py-4">
-                  <span class="text-sm font-bold text-slate-900">${s.code || "—"}</span>
+                  <span class="text-sm font-bold text-slate-900">${s.code || '—'}</span>
                 </td>
                 <td class="px-6 py-4">
                   <div class="flex items-center gap-3">
@@ -945,7 +815,7 @@
                   <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">${className}</span>
                 </td>
                 <td class="px-6 py-4">
-                  <span class="text-sm text-slate-900">${s.year || "—"}</span>
+                  <span class="text-sm text-slate-900">${s.year || '—'}</span>
                 </td>
                 <td class="px-6 py-4">
                   <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
@@ -963,351 +833,313 @@
                     </button>
                   </div>
                 </td>
-              </tr>`;
-          })
-          .join("");
-      }
-
-      // ==================== PAGINATION ====================
-      function renderPagination() {
-        const info = document.getElementById("pagination-info");
-        const start = (currentPage - 1) * perPage + 1;
-        const end = Math.min(currentPage * perPage, totalStudents);
-        info.textContent =
-          totalStudents > 0
-            ? `Đang xem bản ghi ${start} đến ${end} trong tổng số ${totalStudents.toLocaleString()}`
-            : "Không có bản ghi nào";
-
-        const container = document.getElementById("pagination-buttons");
-        container.innerHTML = "";
-
-        if (totalPages <= 1) return;
-
-        const maxVisible = 5;
-        let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
-        let endPage = Math.min(totalPages, startPage + maxVisible - 1);
-        if (endPage - startPage < maxVisible - 1) {
-          startPage = Math.max(1, endPage - maxVisible + 1);
-        }
-
-        if (startPage > 1) {
-          container.appendChild(createPageButton(1));
-          if (startPage > 2) {
-            const dots = document.createElement("span");
-            dots.className = "px-2 text-slate-400";
-            dots.textContent = "...";
-            container.appendChild(dots);
-          }
-        }
-
-        for (let i = startPage; i <= endPage; i++) {
-          container.appendChild(createPageButton(i));
-        }
-
-        if (endPage < totalPages) {
-          if (endPage < totalPages - 1) {
-            const dots = document.createElement("span");
-            dots.className = "px-2 text-slate-400";
-            dots.textContent = "...";
-            container.appendChild(dots);
-          }
-          container.appendChild(createPageButton(totalPages));
-        }
-      }
-
-      function createPageButton(page) {
-        const btn = document.createElement("button");
-        btn.textContent = page;
-        btn.className =
-          page === currentPage
-            ? "w-8 h-8 flex items-center justify-center rounded-lg bg-primary text-white font-medium text-sm"
-            : "w-8 h-8 flex items-center justify-center rounded-lg hover:bg-slate-100 transition-colors text-sm";
-        btn.addEventListener("click", () => {
-          currentPage = page;
-          loadStudents();
-        });
-        return btn;
-      }
-
-      function updatePageButtons() {
-        const prevBtn = document.getElementById("btn-prev-page");
-        const nextBtn = document.getElementById("btn-next-page");
-        prevBtn.disabled = currentPage <= 1;
-        nextBtn.disabled = currentPage >= totalPages;
-      }
-
-      // ==================== MODAL ====================
-      function openModal() {
-        const modal = document.getElementById("student-modal");
-        modal.classList.remove("hidden");
-        modal.classList.add("flex");
-      }
-
-      function closeModal() {
-        const modal = document.getElementById("student-modal");
-        modal.classList.add("hidden");
-        modal.classList.remove("flex");
-        resetForm();
-      }
-
-      function resetForm() {
-        document.getElementById("student-form").reset();
-        document.getElementById("form-student-id").value = "";
-        document.getElementById("modal-title").textContent =
-          "Thêm sinh viên mới";
-        hideFormError();
-      }
-
-      function showFormError(msg) {
-        const el = document.getElementById("form-error");
-        document.getElementById("form-error-text").textContent = msg;
-        el.classList.remove("hidden");
-        el.classList.add("flex");
-      }
-
-      function hideFormError() {
-        const el = document.getElementById("form-error");
-        el.classList.add("hidden");
-        el.classList.remove("flex");
-      }
-
-      // ==================== ADD STUDENT ====================
-      document
-        .getElementById("btn-add-student")
-        .addEventListener("click", () => {
-          resetForm();
-          document.getElementById("modal-title").textContent =
-            "Thêm sinh viên mới";
-          openModal();
-        });
-
-      // ==================== EDIT STUDENT ====================
-      async function openEditModal(id) {
-        resetForm();
-        document.getElementById("modal-title").textContent =
-          "Chỉnh sửa sinh viên";
-        openModal();
-
-        try {
-          const res = await apiFetch(`/students/${id}`);
-          const s = res.data || res;
-
-          document.getElementById("form-student-id").value = s.id;
-          document.getElementById("form-last-name").value = s.last_name || "";
-          document.getElementById("form-first-name").value =
-            s.first_name || "";
-          document.getElementById("form-code").value = s.code || "";
-          document.getElementById("form-email").value = s.email || "";
-          document.getElementById("form-birthday").value = s.birthday
-            ? formatDateToInput(s.birthday)
-            : "";
-          document.getElementById("form-gender").value = s.gender || "";
-          document.getElementById("form-phone").value = s.phone || "";
-          document.getElementById("form-address").value = s.address || "";
-          document.getElementById("form-class").value = s.class_id || "";
-          document.getElementById("form-year").value = s.year || "";
-        } catch (err) {
-          showFormError(
-            err.data?.message || err.message || "Không thể tải thông tin",
-          );
-        }
-      }
-
-      function formatDateToInput(dateStr) {
-        if (!dateStr) return "";
-        const d = new Date(dateStr);
-        if (isNaN(d)) return dateStr;
-        const dd = String(d.getDate()).padStart(2, "0");
-        const mm = String(d.getMonth() + 1).padStart(2, "0");
-        const yyyy = d.getFullYear();
-        return `${dd}-${mm}-${yyyy}`;
-      }
-
-      // ==================== FORM SUBMIT ====================
-      document
-        .getElementById("student-form")
-        .addEventListener("submit", async (e) => {
-          e.preventDefault();
-          hideFormError();
-
-          const studentId = document.getElementById("form-student-id").value;
-          const data = {
-            first_name: document.getElementById("form-first-name").value.trim(),
-            last_name: document.getElementById("form-last-name").value.trim(),
-            code: document.getElementById("form-code").value.trim(),
-            email: document.getElementById("form-email").value.trim(),
-            birthday: document.getElementById("form-birthday").value.trim(),
-            gender: document.getElementById("form-gender").value,
-            phone: document.getElementById("form-phone").value.trim(),
-            address: document.getElementById("form-address").value.trim(),
-            class_id: Number(document.getElementById("form-class").value),
-            year: document.getElementById("form-year").value.trim(),
-          };
-
-          const submitBtn = document.getElementById("form-submit");
-          submitBtn.disabled = true;
-          submitBtn.innerHTML =
-            '<span class="material-symbols-outlined text-[20px] animate-spin">progress_activity</span> <span>Đang lưu...</span>';
-
-          try {
-            if (studentId) {
-              await apiFetch(`/students/${studentId}`, {
-                method: "PATCH",
-                body: JSON.stringify(data),
-              });
-              showToast("Cập nhật sinh viên thành công!", "success");
-            } else {
-              await apiFetch("/students", {
-                method: "POST",
-                body: JSON.stringify(data),
-              });
-              showToast("Thêm sinh viên thành công!", "success");
+              </tr>`
+                    })
+                    .join('')
             }
-            closeModal();
-            await loadStudents();
-          } catch (err) {
-            const msg =
-              err.data?.message || err.message || "Thao tác thất bại";
-            showFormError(msg);
-          } finally {
-            submitBtn.disabled = false;
-            submitBtn.innerHTML =
-              '<span class="material-symbols-outlined text-[20px]">save</span> <span>Lưu sinh viên</span>';
-          }
-        });
 
-      // ==================== DELETE ====================
-      function openDeleteModal(id, name) {
-        deleteTargetId = id;
-        document.getElementById("delete-student-name").textContent =
-          `Bạn có chắc muốn xóa sinh viên "${name}"? Hành động này không thể hoàn tác.`;
-        const modal = document.getElementById("delete-modal");
-        modal.classList.remove("hidden");
-        modal.classList.add("flex");
-      }
+            // ==================== PAGINATION ====================
+            function renderPagination() {
+                const info = document.getElementById('pagination-info')
+                const start = (currentPage - 1) * perPage + 1
+                const end = Math.min(currentPage * perPage, totalStudents)
+                info.textContent =
+                    totalStudents > 0
+                        ? `Đang xem bản ghi ${start} đến ${end} trong tổng số ${totalStudents.toLocaleString()}`
+                        : 'Không có bản ghi nào'
 
-      function closeDeleteModal() {
-        deleteTargetId = null;
-        const modal = document.getElementById("delete-modal");
-        modal.classList.add("hidden");
-        modal.classList.remove("flex");
-      }
+                const container = document.getElementById('pagination-buttons')
+                container.innerHTML = ''
 
-      document
-        .getElementById("btn-confirm-delete")
-        .addEventListener("click", async () => {
-          if (!deleteTargetId) return;
+                if (totalPages <= 1) return
 
-          try {
-            await apiFetch(`/students/${deleteTargetId}`, {
-              method: "DELETE",
-            });
-            showToast("Xóa sinh viên thành công!", "success");
-            closeDeleteModal();
-            await loadStudents();
-          } catch (err) {
-            showToast(
-              err.data?.message || err.message || "Xóa thất bại",
-              "error",
-            );
-            closeDeleteModal();
-          }
-        });
+                const maxVisible = 5
+                let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2))
+                let endPage = Math.min(totalPages, startPage + maxVisible - 1)
+                if (endPage - startPage < maxVisible - 1) {
+                    startPage = Math.max(1, endPage - maxVisible + 1)
+                }
 
-      document
-        .getElementById("btn-cancel-delete")
-        .addEventListener("click", closeDeleteModal);
+                if (startPage > 1) {
+                    container.appendChild(createPageButton(1))
+                    if (startPage > 2) {
+                        const dots = document.createElement('span')
+                        dots.className = 'px-2 text-slate-400'
+                        dots.textContent = '...'
+                        container.appendChild(dots)
+                    }
+                }
 
-      // ==================== TOAST ====================
-      function showToast(message, type = "success") {
-        const container = document.getElementById("toast-container");
-        const toast = document.createElement("div");
-        const isSuccess = type === "success";
-        toast.className = `animate-slide-in flex items-center gap-3 px-5 py-3 rounded-xl shadow-lg text-sm font-medium ${
-          isSuccess
-            ? "bg-green-600 text-white"
-            : "bg-error text-white"
-        }`;
-        toast.innerHTML = `
-          <span class="material-symbols-outlined text-lg">${isSuccess ? "check_circle" : "error"}</span>
-          <span>${message}</span>`;
-        container.appendChild(toast);
+                for (let i = startPage; i <= endPage; i++) {
+                    container.appendChild(createPageButton(i))
+                }
 
-        setTimeout(() => {
-          toast.style.transition = "opacity 0.3s";
-          toast.style.opacity = "0";
-          setTimeout(() => toast.remove(), 300);
-        }, 3000);
-      }
+                if (endPage < totalPages) {
+                    if (endPage < totalPages - 1) {
+                        const dots = document.createElement('span')
+                        dots.className = 'px-2 text-slate-400'
+                        dots.textContent = '...'
+                        container.appendChild(dots)
+                    }
+                    container.appendChild(createPageButton(totalPages))
+                }
+            }
 
-      // ==================== EVENT LISTENERS ====================
-      // Close modals
-      document
-        .getElementById("btn-close-modal")
-        .addEventListener("click", closeModal);
-      document
-        .getElementById("student-modal")
-        .addEventListener("click", (e) => {
-          if (e.target === e.currentTarget) closeModal();
-        });
-      document
-        .getElementById("delete-modal")
-        .addEventListener("click", (e) => {
-          if (e.target === e.currentTarget) closeDeleteModal();
-        });
+            function createPageButton(page) {
+                const btn = document.createElement('button')
+                btn.textContent = page
+                btn.className =
+                    page === currentPage
+                        ? 'w-8 h-8 flex items-center justify-center rounded-lg bg-primary text-white font-medium text-sm'
+                        : 'w-8 h-8 flex items-center justify-center rounded-lg hover:bg-slate-100 transition-colors text-sm'
+                btn.addEventListener('click', () => {
+                    currentPage = page
+                    loadStudents()
+                })
+                return btn
+            }
 
-      // Pagination arrow buttons
-      document
-        .getElementById("btn-prev-page")
-        .addEventListener("click", () => {
-          if (currentPage > 1) {
-            currentPage--;
-            loadStudents();
-          }
-        });
-      document
-        .getElementById("btn-next-page")
-        .addEventListener("click", () => {
-          if (currentPage < totalPages) {
-            currentPage++;
-            loadStudents();
-          }
-        });
+            function updatePageButtons() {
+                const prevBtn = document.getElementById('btn-prev-page')
+                const nextBtn = document.getElementById('btn-next-page')
+                prevBtn.disabled = currentPage <= 1
+                nextBtn.disabled = currentPage >= totalPages
+            }
 
-      // Filters
-      document
-        .getElementById("filter-class")
-        .addEventListener("change", () => {
-          currentPage = 1;
-          loadStudents();
-        });
+            // ==================== MODAL ====================
+            function openModal() {
+                const modal = document.getElementById('student-modal')
+                modal.classList.remove('hidden')
+                modal.classList.add('flex')
+            }
 
-      document
-        .getElementById("filter-gender")
-        .addEventListener("change", () => {
-          loadStudents();
-        });
+            function closeModal() {
+                const modal = document.getElementById('student-modal')
+                modal.classList.add('hidden')
+                modal.classList.remove('flex')
+                resetForm()
+            }
 
-      // Search (debounced)
-      let searchTimeout;
-      document
-        .getElementById("search-input")
-        .addEventListener("input", () => {
-          clearTimeout(searchTimeout);
-          searchTimeout = setTimeout(() => {
-            loadStudents();
-          }, 400);
-        });
+            function resetForm() {
+                document.getElementById('student-form').reset()
+                document.getElementById('form-student-id').value = ''
+                document.getElementById('modal-title').textContent = 'Thêm sinh viên mới'
+                hideFormError()
+            }
 
-      // Logout
-      document.getElementById("btn-logout").addEventListener("click", () => {
-        localStorage.removeItem("access_token");
-        localStorage.removeItem("refresh_token");
-        window.location.href = "auth.html";
-      });
+            function showFormError(msg) {
+                const el = document.getElementById('form-error')
+                document.getElementById('form-error-text').textContent = msg
+                el.classList.remove('hidden')
+                el.classList.add('flex')
+            }
 
-      // ==================== START ====================
-      init();
-    </script>
-  </body>
+            function hideFormError() {
+                const el = document.getElementById('form-error')
+                el.classList.add('hidden')
+                el.classList.remove('flex')
+            }
+
+            // ==================== ADD STUDENT ====================
+            document.getElementById('btn-add-student').addEventListener('click', () => {
+                resetForm()
+                document.getElementById('modal-title').textContent = 'Thêm sinh viên mới'
+                openModal()
+            })
+
+            // ==================== EDIT STUDENT ====================
+            async function openEditModal(id) {
+                resetForm()
+                document.getElementById('modal-title').textContent = 'Chỉnh sửa sinh viên'
+                openModal()
+
+                try {
+                    const res = await apiFetch(`/students/${id}`)
+                    const s = res.data || res
+
+                    document.getElementById('form-student-id').value = s.id
+                    document.getElementById('form-last-name').value = s.last_name || ''
+                    document.getElementById('form-first-name').value = s.first_name || ''
+                    document.getElementById('form-code').value = s.code || ''
+                    document.getElementById('form-email').value = s.email || ''
+                    document.getElementById('form-birthday').value = s.birthday ? formatDateToInput(s.birthday) : ''
+                    document.getElementById('form-gender').value = s.gender || ''
+                    document.getElementById('form-phone').value = s.phone || ''
+                    document.getElementById('form-address').value = s.address || ''
+                    document.getElementById('form-class').value = s.class_id || ''
+                    document.getElementById('form-year').value = s.year || ''
+                } catch (err) {
+                    showFormError(err.data?.message || err.message || 'Không thể tải thông tin')
+                }
+            }
+
+            function formatDateToInput(dateStr) {
+                if (!dateStr) return ''
+                const d = new Date(dateStr)
+                if (isNaN(d)) return dateStr
+                const dd = String(d.getDate()).padStart(2, '0')
+                const mm = String(d.getMonth() + 1).padStart(2, '0')
+                const yyyy = d.getFullYear()
+                return `${dd}-${mm}-${yyyy}`
+            }
+
+            // ==================== FORM SUBMIT ====================
+            document.getElementById('student-form').addEventListener('submit', async (e) => {
+                e.preventDefault()
+                hideFormError()
+
+                const studentId = document.getElementById('form-student-id').value
+                const data = {
+                    first_name: document.getElementById('form-last-name').value.trim(),
+                    last_name: document.getElementById('form-first-name').value.trim(),
+                    code: document.getElementById('form-code').value.trim(),
+                    email: document.getElementById('form-email').value.trim(),
+                    birthday: document.getElementById('form-birthday').value.trim(),
+                    gender: document.getElementById('form-gender').value,
+                    phone: document.getElementById('form-phone').value.trim(),
+                    address: document.getElementById('form-address').value.trim(),
+                    class_id: Number(document.getElementById('form-class').value),
+                    year: document.getElementById('form-year').value.trim(),
+                }
+
+                const submitBtn = document.getElementById('form-submit')
+                submitBtn.disabled = true
+                submitBtn.innerHTML =
+                    '<span class="material-symbols-outlined text-[20px] animate-spin">progress_activity</span> <span>Đang lưu...</span>'
+
+                try {
+                    if (studentId) {
+                        await apiFetch(`/students/${studentId}`, {
+                            method: 'PATCH',
+                            body: JSON.stringify(data),
+                        })
+                        showToast('Cập nhật sinh viên thành công!', 'success')
+                    } else {
+                        await apiFetch('/students', {
+                            method: 'POST',
+                            body: JSON.stringify(data),
+                        })
+                        showToast('Thêm sinh viên thành công!', 'success')
+                    }
+                    closeModal()
+                    await loadStudents()
+                } catch (err) {
+                    const msg = err.data?.message || err.message || 'Thao tác thất bại'
+                    showFormError(msg)
+                } finally {
+                    submitBtn.disabled = false
+                    submitBtn.innerHTML =
+                        '<span class="material-symbols-outlined text-[20px]">save</span> <span>Lưu sinh viên</span>'
+                }
+            })
+
+            // ==================== DELETE ====================
+            function openDeleteModal(id, name) {
+                deleteTargetId = id
+                document.getElementById('delete-student-name').textContent =
+                    `Bạn có chắc muốn xóa sinh viên "${name}"? Hành động này không thể hoàn tác.`
+                const modal = document.getElementById('delete-modal')
+                modal.classList.remove('hidden')
+                modal.classList.add('flex')
+            }
+
+            function closeDeleteModal() {
+                deleteTargetId = null
+                const modal = document.getElementById('delete-modal')
+                modal.classList.add('hidden')
+                modal.classList.remove('flex')
+            }
+
+            document.getElementById('btn-confirm-delete').addEventListener('click', async () => {
+                if (!deleteTargetId) return
+
+                try {
+                    await apiFetch(`/students/${deleteTargetId}`, {
+                        method: 'DELETE',
+                    })
+                    showToast('Xóa sinh viên thành công!', 'success')
+                    closeDeleteModal()
+                    await loadStudents()
+                } catch (err) {
+                    showToast(err.data?.message || err.message || 'Xóa thất bại', 'error')
+                    closeDeleteModal()
+                }
+            })
+
+            document.getElementById('btn-cancel-delete').addEventListener('click', closeDeleteModal)
+
+            // ==================== TOAST ====================
+            function showToast(message, type = 'success') {
+                const container = document.getElementById('toast-container')
+                const toast = document.createElement('div')
+                const isSuccess = type === 'success'
+                toast.className = `animate-slide-in flex items-center gap-3 px-5 py-3 rounded-xl shadow-lg text-sm font-medium ${
+                    isSuccess ? 'bg-green-600 text-white' : 'bg-error text-white'
+                }`
+                toast.innerHTML = `
+          <span class="material-symbols-outlined text-lg">${isSuccess ? 'check_circle' : 'error'}</span>
+          <span>${message}</span>`
+                container.appendChild(toast)
+
+                setTimeout(() => {
+                    toast.style.transition = 'opacity 0.3s'
+                    toast.style.opacity = '0'
+                    setTimeout(() => toast.remove(), 300)
+                }, 3000)
+            }
+
+            // ==================== EVENT LISTENERS ====================
+            // Close modals
+            document.getElementById('btn-close-modal').addEventListener('click', closeModal)
+            document.getElementById('student-modal').addEventListener('click', (e) => {
+                if (e.target === e.currentTarget) closeModal()
+            })
+            document.getElementById('delete-modal').addEventListener('click', (e) => {
+                if (e.target === e.currentTarget) closeDeleteModal()
+            })
+
+            // Pagination arrow buttons
+            document.getElementById('btn-prev-page').addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--
+                    loadStudents()
+                }
+            })
+            document.getElementById('btn-next-page').addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++
+                    loadStudents()
+                }
+            })
+
+            // Filters
+            document.getElementById('filter-class').addEventListener('change', () => {
+                currentPage = 1
+                loadStudents()
+            })
+
+            document.getElementById('filter-gender').addEventListener('change', () => {
+                loadStudents()
+            })
+
+            // Search (debounced)
+            let searchTimeout
+            document.getElementById('search-input').addEventListener('input', () => {
+                clearTimeout(searchTimeout)
+                searchTimeout = setTimeout(() => {
+                    loadStudents()
+                }, 400)
+            })
+
+            // Logout
+            document.getElementById('btn-logout').addEventListener('click', () => {
+                localStorage.removeItem('access_token')
+                localStorage.removeItem('refresh_token')
+                window.location.href = 'auth.html'
+            })
+
+            // ==================== START ====================
+            init()
+        </script>
+    </body>
 </html>
