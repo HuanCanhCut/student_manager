@@ -1,0 +1,658 @@
+<!doctype html>
+
+<html class="light" lang="vi">
+    <head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>Quản lý học phí - Hệ thống Giáo vụ</title>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+            rel="stylesheet"
+        />
+        <script id="tailwind-config">
+            tailwind.config = {
+                darkMode: 'class',
+                theme: {
+                    extend: {
+                        colors: {
+                            'inverse-surface': '#1e293b',
+                            'surface-container-low': '#f8fafc',
+                            'surface-bright': '#ffffff',
+                            'surface-tint': '#137fec',
+                            'surface-dim': '#f6f7f8',
+                            secondary: '#475569',
+                            'tertiary-fixed': '#ffedd5',
+                            outline: '#e2e8f0',
+                            'on-background': '#0f172a',
+                            tertiary: '#ea580c',
+                            'on-secondary-fixed': '#0f172a',
+                            background: '#f6f7f8',
+                            'on-error': '#ffffff',
+                            'outline-variant': '#cbd5e1',
+                            'on-tertiary-fixed': '#431407',
+                            'surface-container-highest': '#cbd5e1',
+                            'on-primary-fixed': '#1e3a8a',
+                            'secondary-fixed': '#f1f5f9',
+                            'tertiary-fixed-dim': '#fed7aa',
+                            'inverse-on-surface': '#f1f5f9',
+                            'on-tertiary-container': '#9a3412',
+                            'on-primary': '#ffffff',
+                            'error-container': '#fee2e2',
+                            'inverse-primary': '#93c5fd',
+                            'surface-container-lowest': '#ffffff',
+                            'on-secondary-fixed-variant': '#334155',
+                            'surface-variant': '#f1f5f9',
+                            primary: '#137fec',
+                            'surface-container-high': '#e2e8f0',
+                            'on-tertiary-fixed-variant': '#c2410c',
+                            'on-primary-fixed-variant': '#1d4ed8',
+                            'on-secondary-container': '#334155',
+                            surface: '#ffffff',
+                            'on-surface': '#0f172a',
+                            'tertiary-container': '#ffedd5',
+                            'secondary-container': '#f1f5f9',
+                            'on-error-container': '#991b1b',
+                            'on-primary-container': '#1e40af',
+                            'on-surface-variant': '#475569',
+                            'on-tertiary': '#ffffff',
+                            error: '#ef4444',
+                            'surface-container': '#f1f5f9',
+                            'secondary-fixed-dim': '#e2e8f0',
+                            'on-secondary': '#ffffff',
+                            'primary-fixed': '#dbeafe',
+                            'primary-container': '#dbeafe',
+                            'primary-fixed-dim': '#bfdbfe',
+                        },
+                        fontFamily: {
+                            headline: ['Lexend'],
+                            body: ['Lexend'],
+                            label: ['Lexend'],
+                        },
+                        borderRadius: { DEFAULT: '0.25rem', lg: '0.5rem', xl: '0.75rem', full: '9999px' },
+                    },
+                },
+            }
+        </script>
+        <style>
+            body {
+                font-family: 'Lexend', sans-serif;
+            }
+            .material-symbols-outlined {
+                font-variation-settings:
+                    'FILL' 0,
+                    'wght' 400,
+                    'GRAD' 0,
+                    'opsz' 24;
+            }
+        </style>
+    </head>
+    <body class="bg-background text-on-background antialiased min-h-screen">
+        <!-- SideNavBar Component -->
+        <aside
+            class="bg-slate-900 dark:bg-black h-screen w-64 fixed left-0 top-0 border-r border-slate-800 shadow-xl flex flex-col py-6 z-50"
+        >
+            <div class="px-6 mb-8 flex items-center gap-3">
+                <div
+                    class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20"
+                >
+                    <span class="material-symbols-outlined text-white" data-icon="school">school</span>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-white tracking-tight">Hệ thống Giáo vụ</h1>
+                    <p class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Quản trị viên</p>
+                </div>
+            </div>
+            <nav class="flex-1 space-y-1 overflow-y-auto">
+                <a
+                    class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg mx-2 transition-colors font-lexend text-sm font-medium"
+                    href="#"
+                >
+                    <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                    <span>Tổng quan</span>
+                </a>
+                <a
+                    class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg mx-2 transition-colors font-lexend text-sm font-medium"
+                    href="#"
+                >
+                    <span class="material-symbols-outlined" data-icon="group">group</span>
+                    <span>Quản lý sinh viên</span>
+                </a>
+                <a
+                    class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg mx-2 transition-colors font-lexend text-sm font-medium"
+                    href="#"
+                >
+                    <span class="material-symbols-outlined" data-icon="grade">grade</span>
+                    <span>Quản lý điểm</span>
+                </a>
+                <a
+                    class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg mx-2 transition-colors font-lexend text-sm font-medium"
+                    href="#"
+                >
+                    <span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+                    <span>Quản lý thời khóa biểu</span>
+                </a>
+                <a
+                    class="flex items-center gap-3 px-4 py-3 text-white bg-blue-600 rounded-lg mx-2 transition-colors font-lexend text-sm font-medium shadow-lg shadow-blue-600/20"
+                    href="#"
+                >
+                    <span
+                        class="material-symbols-outlined"
+                        data-icon="payments"
+                        style="font-variation-settings: 'FILL' 1"
+                        >payments</span
+                    >
+                    <span>Quản lý học phí</span>
+                </a>
+            </nav>
+            <div class="mt-auto px-4 pt-4 border-t border-slate-800">
+                <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-800 transition-all cursor-pointer">
+                    <img
+                        alt="Admin Profile"
+                        class="w-10 h-10 rounded-full border-2 border-slate-700"
+                        data-alt="Portrait of a professional school administrator"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOGnAtGO8oXEmSAWg3bmga98oeZaJKjGXscjmtWeaPmb2METBjiZbRuQKXsjsBsvaMklNoW1v5W104ld8xlDFh93k1uOnfLnomyRmbVAeaSEeipcEDOk9HWGyRquxBICcG40y4NJ8z3pIuUMGOy6moXkAPfQd4XsRviDS2ShLCx1lr3BZ6E2voCd_2hY6wXTe7zx6l_8R8OBFG97PUDX7p58BK7H1_SBcg9erQ3pWW_CHzpkLVrdkNujKvY3rp0OQ_JbSdYogeeA"
+                    />
+                    <div class="overflow-hidden">
+                        <p class="text-sm font-bold text-white truncate">Trần Văn A</p>
+                        <p class="text-xs text-slate-500 truncate">admin@school.edu.vn</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <!-- TopNavBar Component -->
+        <header
+            class="fixed top-0 right-0 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md flex justify-between items-center h-16 px-8 ml-64 w-[calc(100%-16rem)] z-40"
+        >
+            <div class="flex items-center gap-4 bg-surface-container-low px-4 py-2 rounded-full border border-outline">
+                <span class="material-symbols-outlined text-on-surface-variant text-sm" data-icon="search">search</span>
+                <input
+                    class="bg-transparent border-none focus:ring-0 text-sm font-lexend w-64 placeholder:text-slate-400"
+                    placeholder="Tìm kiếm mã sinh viên, tên, lớp..."
+                    type="text"
+                />
+            </div>
+            <div class="flex items-center gap-4">
+                <button
+                    class="hover:bg-slate-100 dark:hover:bg-slate-800 p-2 rounded-full transition-all relative text-slate-600"
+                >
+                    <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+                    <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full"></span>
+                </button>
+                <button
+                    class="hover:bg-slate-100 dark:hover:bg-slate-800 p-2 rounded-full transition-all text-slate-600"
+                >
+                    <span class="material-symbols-outlined" data-icon="settings">settings</span>
+                </button>
+                <div class="h-8 w-[1px] bg-slate-200 mx-2"></div>
+                <span class="text-sm font-medium text-slate-700">Dashboard Giáo vụ</span>
+            </div>
+        </header>
+        <!-- Main Content Canvas -->
+        <main class="ml-64 pt-16 min-h-screen p-8">
+            <!-- Dashboard Header -->
+            <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-on-surface tracking-tight">Tổng hợp Học phí</h2>
+                    <select
+                        id="semester-select"
+                        class="text-on-surface-variant border border-gray-600 text-sm mt-1 bg-transparent border-none p-0 cursor-pointer focus:ring-0 font-medium"
+                    >
+                        <option value="">Đang tải học kỳ...</option>
+                    </select>
+                </div>
+                <div class="flex gap-3"></div>
+            </div>
+            <!-- Metrics Bento Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-outline">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-primary-container rounded-lg text-primary">
+                            <span class="material-symbols-outlined" data-icon="account_balance_wallet"
+                                >account_balance_wallet</span
+                            >
+                        </div>
+                        <span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded"
+                            >+4.2%</span
+                        >
+                    </div>
+                    <h3 class="text-slate-500 text-xs font-semibold uppercase tracking-wider mb-1">Tổng dự thu</h3>
+                    <p id="stat-expected" class="text-2xl font-bold text-on-surface">...</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-outline">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-emerald-100 rounded-lg text-emerald-600">
+                            <span
+                                class="material-symbols-outlined"
+                                data-icon="check_circle"
+                                style="font-variation-settings: 'FILL' 1"
+                                >check_circle</span
+                            >
+                        </div>
+                        <span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">82%</span>
+                    </div>
+                    <h3 class="text-slate-500 text-xs font-semibold uppercase tracking-wider mb-1">Đã thu</h3>
+                    <p id="stat-collected" class="text-2xl font-bold text-on-surface">...</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-outline">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-error-container rounded-lg text-error">
+                            <span
+                                class="material-symbols-outlined"
+                                data-icon="error"
+                                style="font-variation-settings: 'FILL' 1"
+                                >error</span
+                            >
+                        </div>
+                        <span class="text-[10px] font-bold text-error bg-error-container px-2 py-1 rounded">18%</span>
+                    </div>
+                    <h3 class="text-slate-500 text-xs font-semibold uppercase tracking-wider mb-1">Tổng nợ</h3>
+                    <p id="stat-debt" class="text-2xl font-bold text-on-surface">...</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-outline">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-tertiary-container rounded-lg text-tertiary">
+                            <span
+                                class="material-symbols-outlined"
+                                data-icon="group"
+                                style="font-variation-settings: 'FILL' 1"
+                                >group</span
+                            >
+                        </div>
+                    </div>
+                    <h3 class="text-slate-500 text-xs font-semibold uppercase tracking-wider mb-1">SV chưa đóng</h3>
+                    <p id="stat-unpaid" class="text-2xl font-bold text-on-surface">
+                        ... <span class="text-sm font-normal text-slate-400">/ ...</span>
+                    </p>
+                </div>
+            </div>
+            <!-- Main Data Table Container -->
+            <div class="bg-white rounded-xl shadow-sm border border-outline overflow-hidden">
+                <div class="p-6 border-b border-outline flex justify-between items-center bg-surface-container-lowest">
+                    <div class="flex items-center gap-4">
+                        <h3 class="font-bold text-on-surface">Danh sách chi tiết</h3>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-sm text-slate-500">Hiển thị</span>
+                        <select
+                            id="limit-select"
+                            class="text-sm border-outline rounded-md focus:ring-primary focus:border-primary py-1 pr-8 pl-2"
+                        >
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-surface-container-low border-b border-outline">
+                            <tr>
+                                <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">
+                                    MSSV
+                                </th>
+                                <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">
+                                    Họ và tên
+                                </th>
+                                <th
+                                    class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider text-right"
+                                >
+                                    Tổng học phí
+                                </th>
+                                <th
+                                    class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider text-right"
+                                >
+                                    Đã đóng
+                                </th>
+                                <th
+                                    class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider text-right"
+                                >
+                                    Còn nợ
+                                </th>
+                                <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">
+                                    Trạng thái
+                                </th>
+                                <th
+                                    class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider text-center"
+                                >
+                                    Hành động
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="fee-table-body" class="divide-y divide-outline">
+                            <tr>
+                                <td colspan="7" class="py-16 text-center text-slate-400">
+                                    <span class="material-symbols-outlined text-4xl animate-spin mr-2"
+                                        >progress_activity</span
+                                    >
+                                    <span class="text-sm">Đang tải dữ liệu...</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Pagination -->
+                <div
+                    class="px-6 py-4 bg-surface-container-lowest border-t border-outline flex items-center justify-between"
+                >
+                    <span id="pagination-info" class="text-sm text-slate-500 font-medium">Đang tải...</span>
+                    <div id="pagination-controls" class="flex gap-2">
+                        <!-- Generated by JS -->
+                    </div>
+                </div>
+            </div>
+            <!-- History Sidebar (Simulated as a Side Drawer) -->
+            <div class="hidden fixed inset-0 z-50 overflow-hidden" id="history-drawer">
+                <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"></div>
+                <div class="absolute inset-y-0 right-0 max-w-md w-full bg-white shadow-2xl flex flex-col">
+                    <div class="p-6 border-b border-outline flex justify-between items-center">
+                        <div>
+                            <h4 class="text-lg font-bold text-on-surface">Lịch sử thanh toán</h4>
+                            <p class="text-xs text-slate-500 font-medium">MSSV: 2020601234 - Nguyễn Văn An</p>
+                        </div>
+                        <button class="p-2 hover:bg-slate-100 rounded-full transition-colors">
+                            <span class="material-symbols-outlined" data-icon="close">close</span>
+                        </button>
+                    </div>
+                    <div class="flex-1 overflow-y-auto p-6">
+                        <div class="space-y-6">
+                            <!-- History Item 1 -->
+                            <div class="flex gap-4 relative">
+                                <div class="absolute left-4 top-10 bottom-0 w-[2px] bg-slate-100"></div>
+                                <div
+                                    class="z-10 w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0"
+                                >
+                                    <span class="material-symbols-outlined text-sm" data-icon="payments">payments</span>
+                                </div>
+                                <div class="flex-1 pb-6">
+                                    <div class="flex justify-between items-start mb-1">
+                                        <p class="text-sm font-bold text-on-surface">Thanh toán Đợt 2</p>
+                                        <span class="text-xs font-bold text-emerald-600">+5.400.000₫</span>
+                                    </div>
+                                    <p class="text-xs text-slate-500 mb-2">15/10/2023 - 14:30</p>
+                                    <div class="bg-surface-container-low p-3 rounded-lg border border-outline">
+                                        <p class="text-xs text-slate-600">Hình thức: Chuyển khoản ngân hàng</p>
+                                        <p class="text-xs text-slate-600">Mã GD: #99023184</p>
+                                        <p class="text-xs text-slate-400 mt-1 italic">"Học phí HK1 đợt 2"</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- History Item 2 -->
+                            <div class="flex gap-4 relative">
+                                <div class="absolute left-4 top-10 bottom-0 w-[2px] bg-slate-100"></div>
+                                <div
+                                    class="z-10 w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0"
+                                >
+                                    <span class="material-symbols-outlined text-sm" data-icon="payments">payments</span>
+                                </div>
+                                <div class="flex-1 pb-6">
+                                    <div class="flex justify-between items-start mb-1">
+                                        <p class="text-sm font-bold text-on-surface">Thanh toán Đợt 1</p>
+                                        <span class="text-xs font-bold text-emerald-600">+10.000.000₫</span>
+                                    </div>
+                                    <p class="text-xs text-slate-500 mb-2">01/09/2023 - 09:15</p>
+                                    <div class="bg-surface-container-low p-3 rounded-lg border border-outline">
+                                        <p class="text-xs text-slate-600">Hình thức: VnPay</p>
+                                        <p class="text-xs text-slate-600">Mã GD: #88122394</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Start Point -->
+                            <div class="flex gap-4">
+                                <div
+                                    class="z-10 w-8 h-8 rounded-full bg-primary-container text-primary flex items-center justify-center flex-shrink-0"
+                                >
+                                    <span class="material-symbols-outlined text-sm" data-icon="description"
+                                        >description</span
+                                    >
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-on-surface">Khởi tạo học phí</p>
+                                    <p class="text-xs text-slate-500">15/08/2023 - 08:00</p>
+                                    <p class="text-xs text-slate-400 mt-1">Định mức HK1: 15.400.000₫</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 border-t border-outline bg-surface-container-low">
+                        <button
+                            class="w-full bg-white border border-outline py-2.5 rounded-lg text-sm font-bold text-on-surface hover:bg-white transition-all shadow-sm"
+                        >
+                            In biên lai tổng hợp
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body>
+    <script src="api.js"></script>
+    <script>
+        // Utilities
+        function formatMoney(amount) {
+            return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount)
+        }
+
+        function getInitials(name) {
+            if (!name) return '?'
+            const parts = name.split(' ')
+            if (parts.length === 1) return name.charAt(0).toUpperCase()
+            return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase()
+        }
+
+        // State
+        let currentPage = 1
+        let currentLimit = 10
+        let currentSemesterId = ''
+
+        async function init() {
+            if (!localStorage.getItem('access_token')) {
+                window.location.href = 'auth.html'
+                return
+            }
+
+            document.getElementById('limit-select').addEventListener('change', (e) => {
+                currentLimit = parseInt(e.target.value)
+                currentPage = 1
+                loadData()
+            })
+
+            document.getElementById('semester-select').addEventListener('change', (e) => {
+                currentSemesterId = e.target.value
+                currentPage = 1
+                loadData()
+            })
+
+            await loadSemesters()
+            await loadData()
+        }
+
+        async function loadSemesters() {
+            try {
+                const res = await apiFetch('/semesters')
+                const select = document.getElementById('semester-select')
+                if (res.data && res.data.length > 0) {
+                    select.innerHTML = res.data.map((s) => `<option value="${s.id}">${s.name}</option>`).join('')
+                    currentSemesterId = res.data[0].id
+                } else {
+                    select.innerHTML = '<option value="">Không có dữ liệu học kỳ</option>'
+                }
+            } catch (err) {
+                console.error('Failed to load semesters', err)
+                document.getElementById('semester-select').innerHTML = '<option value="">Lỗi tải học kỳ</option>'
+            }
+        }
+
+        async function loadData() {
+            try {
+                let url = `/fees/all?page=${currentPage}&limit=${currentLimit}`
+                if (currentSemesterId) url += `&semesterId=${currentSemesterId}`
+
+                const res = await apiFetch(url)
+                const data = res.data
+
+                // Update summary metrics
+                document.getElementById('stat-expected').textContent = formatMoney(data.summary.totalExpected)
+                document.getElementById('stat-collected').textContent = formatMoney(data.summary.totalCollected)
+                document.getElementById('stat-debt').textContent = formatMoney(data.summary.totalDebt)
+
+                document.getElementById('stat-unpaid').innerHTML = `
+                    ${data.summary.totalUnpaidStudents} <span class="text-sm font-normal text-slate-400">/ ${data.summary.totalStudents}</span>
+                `
+
+                // Render table
+                const tbody = document.getElementById('fee-table-body')
+                if (!data.students || data.students.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="7" class="py-16 text-center text-slate-400">
+                                <span class="material-symbols-outlined text-3xl mr-2">person_off</span>
+                                <span class="text-sm">Không có dữ liệu sinh viên.</span>
+                            </td>
+                        </tr>`
+                    renderPagination(data.pagination || { total: 0, totalPages: 0 })
+                    return
+                }
+
+                tbody.innerHTML = data.students
+                    .map((s) => {
+                        const isPaid = s.status === 'paid'
+                        const statusClass = isPaid
+                            ? 'bg-emerald-100 text-emerald-700'
+                            : 'bg-error-container text-on-error-container'
+                        const statusText = isPaid ? 'Đã hoàn thành' : 'Chưa hoàn thành'
+                        const debtColorClass = isPaid ? 'text-slate-400' : 'text-error font-bold'
+
+                        return `
+                        <tr class="hover:bg-surface-container-low transition-colors group">
+                            <td class="px-6 py-4 text-sm font-semibold text-primary">${s.student_code || '—'}</td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-xs font-bold text-slate-600">
+                                        ${getInitials(s.student_name)}
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-bold text-on-surface leading-tight">${s.student_name || '—'}</p>
+                                        <p class="text-[11px] text-slate-500">Lớp: ${s.class_name || '—'}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-sm font-medium text-right">${formatMoney(s.total_fee)}</td>
+                            <td class="px-6 py-4 text-sm font-medium text-right text-emerald-600">${formatMoney(s.paid_amount)}</td>
+                            <td class="px-6 py-4 text-sm text-right ${debtColorClass}">${formatMoney(s.debt)}</td>
+                            <td class="px-6 py-4">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ${statusClass}">
+                                    ${statusText}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <button 
+                                    class="p-2 ${isPaid ? 'text-error hover:bg-error/10' : 'text-emerald-600 hover:bg-emerald-50'} transition-colors rounded-lg" 
+                                    onclick="toggleFeeStatus(${s.student_id}, ${s.fee_id}, '${isPaid ? 'pending' : 'paid'}')"
+                                    title="${isPaid ? 'Đánh dấu chưa đóng' : 'Đánh dấu đã đóng'}"
+                                >
+                                    <span class="material-symbols-outlined">${isPaid ? 'close' : 'check'}</span>
+                                </button>
+                            </td>
+                        </tr>
+                    `
+                    })
+                    .join('')
+
+                renderPagination(data.pagination)
+            } catch (err) {
+                console.error('Failed to load fee data', err)
+                if (err.status === 401) {
+                    window.location.href = 'auth.html'
+                    return
+                }
+                const tbody = document.getElementById('fee-table-body')
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="py-16 text-center text-slate-400">
+                            <span class="material-symbols-outlined text-3xl mr-2">error</span>
+                            <span class="text-sm">Không thể tải dữ liệu. Vui lòng thử lại.</span>
+                        </td>
+                    </tr>`
+                document.getElementById('pagination-info').textContent = ''
+                document.getElementById('pagination-controls').innerHTML = ''
+            }
+        }
+
+        function renderPagination(pagination) {
+            const info = document.getElementById('pagination-info')
+            const controls = document.getElementById('pagination-controls')
+
+            if (!pagination || pagination.total === 0) {
+                info.textContent = 'Không có sinh viên nào'
+                controls.innerHTML = ''
+                return
+            }
+
+            const total = pagination.total
+            const totalPages = pagination.totalPages
+
+            const startItem = (currentPage - 1) * currentLimit + 1
+            const endItem = Math.min(currentPage * currentLimit, total)
+
+            info.innerHTML = `Hiển thị <span class="font-bold text-on-surface">${startItem}</span> đến <span class="font-bold text-on-surface">${endItem}</span> trong số <span class="font-bold text-on-surface">${total}</span> sinh viên`
+
+            let btns = ''
+
+            // Prev
+            btns += `
+                <button 
+                    onclick="currentPage--; loadData()" 
+                    ${currentPage === 1 ? 'disabled' : ''} 
+                    class="w-8 h-8 flex items-center justify-center rounded border border-outline hover:bg-surface-container-low disabled:opacity-50 transition-colors"
+                >
+                    <span class="material-symbols-outlined text-[18px]">chevron_left</span>
+                </button>
+            `
+
+            // Pages
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === currentPage) {
+                    btns += `<button class="w-8 h-8 flex items-center justify-center rounded border border-primary bg-primary text-white text-xs font-bold">${i}</button>`
+                } else {
+                    btns += `<button onclick="currentPage = ${i}; loadData()" class="w-8 h-8 flex items-center justify-center rounded border border-outline hover:bg-surface-container-low text-xs font-bold transition-colors">${i}</button>`
+                }
+            }
+
+            // Next
+            btns += `
+                <button 
+                    onclick="currentPage++; loadData()" 
+                    ${currentPage === totalPages ? 'disabled' : ''} 
+                    class="w-8 h-8 flex items-center justify-center rounded border border-outline hover:bg-surface-container-low disabled:opacity-50 transition-colors"
+                >
+                    <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+                </button>
+            `
+
+            controls.innerHTML = btns
+        }
+
+        async function toggleFeeStatus(studentId, feeId, status) {
+            try {
+                await apiFetch('/fees/toggle-status', {
+                    method: 'POST',
+                    body: JSON.stringify({ studentId, feeId, status }),
+                })
+                loadData()
+            } catch (err) {
+                console.error(err)
+                alert('Có lỗi xảy ra khi cập nhật trạng thái!')
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', init)
+    </script>
+</html>

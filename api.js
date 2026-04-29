@@ -1,4 +1,4 @@
-const API_BASE = 'http://54.251.167.244:8000/api'
+const API_BASE = 'http://localhost:8000/api'
 
 async function apiFetch(endpoint, options = {}) {
     const token = localStorage.getItem('access_token')
